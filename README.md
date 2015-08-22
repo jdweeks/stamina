@@ -17,4 +17,4 @@ All development for this project has been done locally up to this juncture. The 
 Note: Terminal multiplexers such as tmux can make local development easier in this regard. 
 
 ### Screenshot
-[View](/img/view.png?raw=true)
+[View](screenshot.png?raw=true)

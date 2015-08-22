@@ -1,0 +1,51 @@
+doctype html
+html(ng-app="stamina")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Stamina
+    link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
+    style
+      body  { padding-top:50px; }
+    script(src="/javascripts/angular.min.js")
+    script(src="core.js")
+
+  body(ng-controller="mainController")
+    .container
+      .jumbotron.text-center
+        h1 Stamina
+
+      table.table
+        thead
+          tr
+            th Date
+            th Exercise
+            th Weight
+            th Sets
+            th Reps
+            th
+        tbody    
+          tr(ng-repeat="w in workouts")
+            td {{ w.date }}
+            td {{ w.exercise }}
+            td {{ w.weight }}
+            td {{ w.sets }}
+            td {{ w.reps }}
+            td
+              button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
+
+      form(novalidate)
+        .form-group
+          p Date: 
+          input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+          p Exercise: 
+          input.form-control(type="text", ng-model="formData.exercise", placeholder="e.g. Bench Press")
+          p Weight: 
+          input.form-control(type="number", ng-model="formData.weight", placeholder="e.g. 225")
+          p Sets: 
+          input.form-control(type="number", ng-model="formData.sets", placeholder="e.g. 3")
+          p Reps: 
+          input.form-control(type="number", ng-model="formData.reps", placeholder="e.g. 8")
+ 
+        button.btn.btn-primary.pull-right(type="submit", ng-click="createWorkout()") Save
+         

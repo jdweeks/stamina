@@ -23,15 +23,17 @@ html(ng-app="stamina")
             th Weight
             th Sets
             th Reps
-            th
+            th Action
         tbody    
-          tr(ng-repeat="w in workouts")
+          // display ten most recent workouts
+          tr(ng-repeat="w in workouts.slice(0,10)")
             td {{ w.date }}
             td {{ w.exercise }}
             td {{ w.weight }}
             td {{ w.sets }}
             td {{ w.reps }}
             td
+              button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
               button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
 
       form(novalidate)
@@ -47,5 +49,5 @@ html(ng-app="stamina")
           p Reps: 
           input.form-control(type="number", ng-model="formData.reps", placeholder="e.g. 8")
  
-        button.btn.btn-primary.pull-right(type="submit", ng-click="createWorkout()") Save
+        button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
          

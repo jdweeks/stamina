@@ -9,10 +9,9 @@ All development for this project has been done locally up to this juncture. The 
 
 ### Getting started
 1. Go to the `stamina` directory in your terminal. Install dependencies. `npm install`
-2. Open a new terminal window, start mongod. `mongod`
-3. Open a new terminal window, start the database. `mongo stamina_db`
-4. Back in the `stamina` directory, start the Node server. `npm start`
-5. In your browser, navigate to http://localhost:3000
+2. Open a new terminal window, start the mongo daemon. `mongod`
+3. Back in the `stamina` directory, start the Node server. `npm start`
+4. In your browser, navigate to http://localhost:3000
 
 Note: Terminal multiplexers such as tmux can make local development easier in this regard. 
 

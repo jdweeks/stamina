@@ -89,33 +89,30 @@ router.route('/:id')
     });
   });
 
-// PUT to update workout by ID
+// PUT to update workout
 router.put('/:id', function(req, res) {
-  // get REST of form values. (depend on name attributes)
   var newDate = req.body.date;
   var newExercise = req.body.exercise;
   var newWeight = req.body.weight;
   var newSets = req.body.sets;
   var newReps = req.body.reps;
 
-  // find workout by ID
+  // find workout by ID and update
   mongoose.model('Workout').findById(req.id, function (err, workout) {
-    // update workout
-    workout.update({
-      date: newDate,
-      exercise: newExercise,
-      weight: newWeight,
-      sets: newSets,
-      reps: newReps
-    },
-    function (err, workoutID) {
+    workout.date = req.body.date;
+    workout.exercise = req.body.exercise;
+    workout.weight = req.body.weight;
+    workout.sets = req.body.sets;
+    workout.rep = req.body.reps;
+
+    workout.save(function (err) {
       if (err) {
         res.send('PUT Error: There was a problem updating: ' + err);
       }
       else {
-        res.json(workout);
+        res.json(workout)
       }
-    });
+    });  
   });
 });
 

@@ -18,7 +18,7 @@ Note: Terminal multiplexers such as tmux can make local development easier in th
 ### Structure Overview
 * /model -> files relevant to the database model and schema
 * /public -> frontend files; core.js contains the angular app's controller
-* /routes -> index.js contains routing for the frontend; workouts.js routes REST calls to the API
+* /routes -> index.js routes to the frontend app; workouts.js routes REST calls to the API
 * /views -> Jade templates; index.jade contains the view for the angular app
 * /bin -> contains the express-generated startup script (www)
 

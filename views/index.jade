@@ -26,7 +26,7 @@ html(ng-app="stamina")
             th Action
         tbody    
           // display ten most recent workouts
-          tr(ng-repeat="w in workouts.slice(workouts.length-10,workouts.length)")
+          tr(ng-repeat="w in workouts.slice(-10)")
             td {{ w.date }}
             td {{ w.exercise }}
             td {{ w.weight }}

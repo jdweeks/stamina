@@ -1,0 +1,19 @@
+{
+  "name": "stamina",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "debug": "latest",
+    "express": "latest",
+    "jade": "latest",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "serve-favicon": "latest"
+  }
+}

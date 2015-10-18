@@ -15,7 +15,7 @@ html(ng-app="stamina")
   body(ng-controller="mainController")
     .container-fluid
 
-      nav.navbar.navbar-inverse( role="navigation" )
+      nav.navbar.navbar-inverse(role="navigation")
         .navbar-header
           button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#mynavbar", aria-expanded="false", aria-controls="navbar")
             span.sr-only Toggle navigation
@@ -26,25 +26,20 @@ html(ng-app="stamina")
  
         #mynavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active: a( href="#") Home
+            li.active: a(href="#") Home
             li.dropdown
               a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Menu 
                 span.caret
-              ul.dropdown-menu( role="menu" )
-                li: a( href="#" ) Submit
-                li: a( href="#" ) Browse
-                //li: a( href="#" ) Something else here
-                //li.divider
-                //li.dropdown-header Nav header
-                //li: a( href="#" ) Separated link
-                //li: a( href="#" ) One more separated link
+              ul.dropdown-menu(role="menu")
+                li: a(href="#", ng-click="clickSubmit()") Submit
+                li: a(href="#", ng-click="setView(true,false)") Browse
             li: a( href="#about" ) About
             li: a( href="#contact" ) Contact
 
       .jumbotron.text-center
-        h1 Stamina
+        h2 {{ title }}
       
-      table.table
+      table.table(ng-show="showTable")
         thead
           tr
             th Date
@@ -65,7 +60,7 @@ html(ng-app="stamina")
               button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
               button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
 
-      form(novalidate)
+      form(novalidate, ng-show="showForm")
         .form-group
           p Date: 
           input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd")

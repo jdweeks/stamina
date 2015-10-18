@@ -1,9 +1,14 @@
+'use strict';
+
 (function(){
   var app = angular.module('stamina', []);
 
   app.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $scope.formData = {};
     $scope.updateFlag = false;
+    $scope.showTable = true;
+    $scope.showForm = false;
+    $scope.title = "View Workouts";
 
     // GET all workouts from REST API
     $scope.getWorkouts = function() {
@@ -27,7 +32,6 @@
       $http.post('/api/workouts', $scope.formData)
         .success(function(data) { 
           console.log(data);
-          $scope.formData = {}; // clear form data
           // append newly created workout (given in response) 
           data.date = new Date(data.date).toDateString();
           $scope.workouts.push(data);
@@ -49,7 +53,9 @@
             sets: $scope.workouts[i].sets,
             reps: $scope.workouts[i].reps
           };
-          $scope.updateFlag = true;
+          $scope.setUpdateFlag(true);
+          $scope.setView(false, true);
+          $scope.title = "Update Workout";
         }
       }
     };
@@ -59,7 +65,6 @@
       $http.put('/api/workouts/'+$scope.workouts[$scope.workoutIndex]._id, $scope.formData)
         .success(function(data) {
           console.log(data);
-          $scope.formData = {};
           $scope.workouts[$scope.workoutIndex] = {
             date: new Date(data.date).toDateString(),
             exercise: data.exercise,
@@ -67,7 +72,6 @@
             sets: data.sets,
             reps: data.reps
           };
-          $scope.updateFlag = false;
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -99,6 +103,37 @@
       else {
         $scope.createWorkout();
       }
+      // reset state variables
+      $scope.setUpdateFlag(false);
+      $scope.clearFormData();
+      $scope.setView(true, false);
     };
+
+    // decide which elements are shown in view
+    $scope.setView = function(tableVal, formVal) {
+      $scope.showTable = tableVal;
+      $scope.showForm = formVal;
+      if (tableVal) {
+        $scope.title = "View Workouts";
+      }
+      else {
+        $scope.title = "Submit Workout";
+      }
+    };
+
+    $scope.clickSubmit = function() {
+      $scope.setUpdateFlag(false);
+      $scope.clearFormData();
+      $scope.setView(false,true);
+    };
+
+    $scope.setUpdateFlag = function(val) {
+      $scope.updateFlag = val;
+    };
+
+    $scope.clearFormData = function() {
+      $scope.formData = {};
+    };
+
   }]);
 })();

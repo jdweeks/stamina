@@ -9,7 +9,7 @@ All development for this project has been done locally up to this juncture. The 
 
 ### Getting Started
 1. Go to the `stamina-master` directory in your terminal. Install dependencies. `npm install`
-2. On Linux: Start the mongo daemon in the background. `sudo service mongod start`
+2. On Linux: Start the mongo daemon in the background. `sudo service mongod start`     
    On OSX: Start the mongo daemon in the background. `mongod &`
 3. Back in the `stamina-master` directory, start the Node server. `npm start`
 4. In your browser, navigate to localhost:3000
@@ -20,6 +20,3 @@ All development for this project has been done locally up to this juncture. The 
 * /routes -> index.js routes to the frontend app; workouts.js routes REST calls to the API
 * /views -> Jade templates; index.jade contains the view for the angular app
 * /bin -> contains the express-generated startup script (www)
-
-### Screenshot
-[View](screenshot.png?raw=true)

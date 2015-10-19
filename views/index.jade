@@ -5,8 +5,7 @@ html(ng-app="stamina")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title Stamina
     link(rel="stylesheet", href="/stylesheets/bootstrap.min.css")
-    style
-      body  { padding-top:50px; }
+    link(rel="stylesheet", href="/stylesheets/theme.min.css")
     script(src="/javascripts/jquery-1.11.3.min.js")
     script(src="/javascripts/bootstrap.min.js")  
     script(src="/javascripts/angular.min.js")
@@ -22,24 +21,24 @@ html(ng-app="stamina")
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#") Stamina
+          a.navbar-brand(href="#", ng-click="setView(true,false)") Stamina
  
         #mynavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active: a(href="#") Home
+            li: a(href="#", ng-click="setView(true,false)") Home
             li.dropdown
               a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Menu 
                 span.caret
               ul.dropdown-menu(role="menu")
                 li: a(href="#", ng-click="clickSubmit()") Submit
-                li: a(href="#", ng-click="setView(true,false)") Browse
+                li: a(href="#", ng-click="setView(true,false)") View
             li: a( href="#about" ) About
             li: a( href="#contact" ) Contact
 
       .jumbotron.text-center
         h2 {{ title }}
       
-      table.table(ng-show="showTable")
+      table.table.table-hover(ng-show="showTable")
         thead
           tr
             th Date

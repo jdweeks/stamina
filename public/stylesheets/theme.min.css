@@ -1,6 +1,6 @@
 
-html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-body{margin:0;}
+html{font-family:serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0; background: #f1f1f1 !important}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
 audio:not([controls]){display:none;height:0}
@@ -838,4 +838,4 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 @media (min-width:1200px){.hidden-lg{display:none !important}}
 .visible-print{display:none !important}@media print{.visible-print{display:block !important}table.visible-print{display:table} tr.visible-print{display:table-row !important} th.visible-print,td.visible-print{display:table-cell !important}}
 @media print{.hidden-print{display:none !important}}
-   
+.table, .formgroup, .jumbotron { border: 0px; border-bottom: 3px solid #e5e5e5 !important; background-color: #fff; }

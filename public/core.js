@@ -1,6 +1,5 @@
-'use strict';
-
 (function(){
+  'use strict';
   var app = angular.module('stamina', []);
 
   app.controller('mainController', ['$scope', '$http', function($scope, $http) {

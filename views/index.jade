@@ -38,11 +38,13 @@ html(ng-app="stamina")
             li: a( href="#about" ) About
             li: a( href="#contact" ) Contact
           ul.nav.navbar-nav.navbar-right
-            li: a( href="/logout") Logout 
+            if (user)
+              li: a #{user.username}
+            li: a( href="/logout") Logout
 
       .jumbotron.text-center
         h2 {{ title }}
-      
+
       table.table.table-hover(ng-show="showTable")
         thead
           tr

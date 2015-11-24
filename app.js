@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var session = require('express-session');
 
-//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -21,7 +20,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,18 +35,18 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/api/workouts', workouts);
 
+// passport config
+var account = require('./model/account');
+passport.use(new localStategy(account.authenticate()));
+passport.serializeUser(account.serializeUser());
+passport.deserializeUser(account.deserializeUser());
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// passport config
-var account = require('./model/account');
-passport.use(new localStategy(account.authenticate()));
-passport.serializeUser(account.serializeUser());
-passport.deserializeUser(account.deserializeUser());
 
 // development error handler (will print stacktrace)
 if (app.get('env') === 'development') {

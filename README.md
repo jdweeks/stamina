@@ -7,7 +7,7 @@ Stamina is a simple web application for logging workouts. It consists of an Angu
 All development for this project has been done locally up to this juncture. The API is hosted locally and connects to a local Mongo database. To start hacking as is, you'll need MongoDB and Node.js installed on your machine. Issues and pull requests are welcome. 
 
 ### Getting Started
-1. `git clone` the reposity or download it as an archive.
+1. `git clone` this repository or download it as an archive.
 2. Go to the `stamina-master` directory in your terminal. Install dependencies. `npm install`
 3. On Linux: Start the mongo daemon in the background. `sudo service mongod start`     
    On OSX: Start the mongo daemon in the background. `mongod &`

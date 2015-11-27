@@ -15,8 +15,8 @@ All development for this project has been done locally up to this juncture. The 
 5. In your browser, navigate to localhost:3000
  
 ### Structure Overview
-* /model -> files relevant to the database model and schema
-* /public -> frontend files; core.js contains the angular app's controller
-* /routes -> index.js routes to the frontend app; workouts.js routes REST calls to the API
-* /views -> Jade templates; index.jade contains the view for the angular app
-* /bin -> contains the express-generated startup script (www)
+* `/model` -> files relevant to the database model and schema
+* `/public` -> frontend files; core.js contains the angular app's controller
+* `/routes` -> index.js routes to the frontend app; workouts.js routes REST calls to the API
+* `/views` -> Jade templates; index.jade contains the view for the angular app
+* `/bin` -> contains the express-generated startup script (www)

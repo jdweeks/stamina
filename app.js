@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
+var sass = require('node-sass-middleware');
 
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -16,6 +17,14 @@ var routes = require('./routes/index');
 var workouts = require('./routes/workouts');
 var app = express();
 
+// sass setup
+app.use(sass({
+  src: __dirname + '/sass',
+  dest: __dirname + '/public',
+  debug: true,
+  outputStyle: 'compressed'
+}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -27,7 +36,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // authentication setup
-app.use(session({ secret: 'staminaworkouts' }));
+app.use(session({
+  secret: 'staminaworkouts',
+  resave: false,
+  saveUninitialized: false 
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

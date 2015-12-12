@@ -29,9 +29,9 @@
     // when submitting add form, POST to API
     $scope.createWorkout = function() {
       $http.post('/api/workouts', $scope.formData)
-        .success(function(data) { 
+        .success(function(data) {
           console.log(data);
-          // append newly created workout (given in response) 
+          // append newly created workout (given in response)
           data.date = new Date(data.date).toDateString();
           $scope.workouts.push(data);
         })

@@ -14,8 +14,8 @@ html(ng-app="stamina")
   body(ng-controller="mainController")
     .container-fluid
 
-      //if (!user)
-        //script window.location='/login'
+      if (!user)
+        script window.location='/login'
 
       nav.navbar.navbar-inverse(role="navigation")
         .navbar-header
@@ -39,14 +39,14 @@ html(ng-app="stamina")
             li: a( href="#contact" ) Contact
           ul.nav.navbar-nav.navbar-right
             if (user)
-              li: a #{user.username}
+              li: a( id='username' ) #{user.username}
             li: a( href="/logout") Logout
 
       .jumbotron.text-center
         h2 {{ title }}
       
       .content(ng-show='showTable')
-        row
+        .row
           .col-xs-6
             h3 Recent
             #recent(ng-repeat='w in workouts.slice(-10)')
@@ -55,25 +55,24 @@ html(ng-app="stamina")
               button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
               button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
           .col-xs-6
-            h3 News
-            p <code>stamina</code> is undergoing a UI overhaul
-        row
-          .col-xs-6
-            h3 Streak
-            p Your current streak is <span>{( user.streak }}</span> days
-          .col-xs-6
-            h3 Volume
-            p Squat: 
-            p Deadlift:
-            p Press:
-            p Bench:
-        row 
-          .col-xs-6
-            h3 Records
-            p Squat:
-            p Deadlift:
-            p Press:
-            p Bench: 
+            #news
+              h3 News
+              p <code>stamina</code> is undergoing a UI overhaul
+            #streak
+              h3 Streak
+              p Your current streak is <span>{( user.streak }}</span> days
+            #volume
+              h3 Volume
+              p Squat: 
+              p Deadlift:
+              p Press:
+              p Bench:
+            #records
+              h3 Records
+              p Squat:
+              p Deadlift:
+              p Press:
+              p Bench: 
 
       form(novalidate, ng-show="showForm")
         .form-group
@@ -102,7 +101,8 @@ html(ng-app="stamina")
           output(for="reps", id="repsOut")
           br
           input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+          br
  
         button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-        br
-        br
+    br
+    br

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var workoutSchema = new mongoose.Schema({
+  user: String,
   date: Date,
   exercise: String,
   weight: Number,

@@ -14,11 +14,10 @@ router.use(methodOverride( function (req, res) {
   }
 }));
 
-// Build REST operations at base for workouts
 router.route('/')
   // GET all workouts
-  .get( function(req, res, next) {
-    mongoose.model('Workout').find({}, function (err, workouts) {
+  .get(function(req, res) {
+    mongoose.model('Workout').find({ 'user': req.user.username }, function (err, workouts) {
       if (err) {
         res.send('GET Error: There was a problem retrieiving: ' + err);
       }
@@ -27,24 +26,17 @@ router.route('/')
       }
     });
   })
-  
-  // POST a new workout
-  .post( function(req, res) {
-    // get values from POST request through form or REST call. form depends on 'name' attributes
-    var newDate = req.body.date;
-    var newExercise = req.body.exercise;
-    var newWeight = req.body.weight;
-    var newSets = req.body.sets;
-    var newReps = req.body.reps;
 
-    // call create function for db
+  // POST a new workout
+  .post(function(req, res) {
     mongoose.model('Workout').create( {
-      date: newDate,
-      exercise: newExercise,
-      weight: newWeight,
-      sets: newSets,
-      reps: newReps
-    }, 
+      user: req.user.username,
+      date: req.body.date,
+      exercise: req.body.exercise,
+      weight: req.body.weight,
+      sets: req.body.sets,
+      reps: req.body.reps
+    },
     function (err, workout) {
       if (err) {
         res.send('POST Error: There was a problem creating: ' + err);
@@ -55,9 +47,8 @@ router.route('/')
     })
   });
 
-// route middleware to validate :id
+// route middleware to validate id
 router.param('id', function(req, res, next, id) {
-  // find ID in database
   mongoose.model('Workout').findById(id, function(err, workout) {
     // respond with 404 if workout isn't found
     if (err) {
@@ -75,9 +66,9 @@ router.param('id', function(req, res, next, id) {
   });
 });
 
-// GET individual workout for display
 router.route('/:id')
-  .get( function(req, res) {
+  // GET individual workout
+  .get(function(req, res) {
     mongoose.model('Workout').findById(req.id, function(err, workout) {
       if (err) {
         res.send('GET Error: There was a problem retrieving: ' + err);
@@ -91,14 +82,9 @@ router.route('/:id')
 
 // PUT to update workout
 router.put('/:id', function(req, res) {
-  var newDate = req.body.date;
-  var newExercise = req.body.exercise;
-  var newWeight = req.body.weight;
-  var newSets = req.body.sets;
-  var newReps = req.body.reps;
-
   // find workout by ID and update
   mongoose.model('Workout').findById(req.id, function (err, workout) {
+    workout.user = req.user.username;
     workout.date = req.body.date;
     workout.exercise = req.body.exercise;
     workout.weight = req.body.weight;
@@ -110,9 +96,9 @@ router.put('/:id', function(req, res) {
         res.send('PUT Error: There was a problem updating: ' + err);
       }
       else {
-        res.json(workout)
+        res.json(workout);
       }
-    });  
+    });
   });
 });
 
@@ -139,5 +125,5 @@ router.delete('/:id', function (req, res) {
     }
   });
 });
-    
+
 module.exports = router;

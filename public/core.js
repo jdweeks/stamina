@@ -9,7 +9,7 @@
     $scope.showForm = false;
     $scope.title = "View Workouts";
 
-    // GET all workouts from REST API
+    // GET all workouts
     $scope.getWorkouts = function() {
       $http.get('/api/workouts')
         .success(function(data) {
@@ -112,6 +112,7 @@
     $scope.setView = function(tableVal, formVal) {
       $scope.showTable = tableVal;
       $scope.showForm = formVal;
+      $('.navbar-toggle').click();
       if (tableVal) {
         $scope.title = "View Workouts";
       }

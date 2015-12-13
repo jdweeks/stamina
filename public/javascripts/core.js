@@ -16,8 +16,8 @@
       var today = new Date();
       var day_in_ms = 1000*60*60*24;
       for (var i = 0; i < workouts.length; i++) {
-        let date = new Date(workouts[i].date);
-        let diff = (today - date) / day_in_ms;
+        var date = new Date(workouts[i].date);
+        var diff = (today - date) / day_in_ms;
         if (diff < 1)
           $scope.streak += 1;
         today -= day_in_ms;

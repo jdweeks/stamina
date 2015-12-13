@@ -4,21 +4,36 @@
 
   app.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $scope.formData = {};
+    $scope.workouts = [];
     $scope.updateFlag = false;
     $scope.showTable = true;
     $scope.showForm = false;
-    $scope.title = "View Workouts";
+    $scope.streak = 0;
+    $scope.title = "Dashboard";
+
+    // count user's streak in days
+    $scope.countStreak = function(workouts) {
+      var today = new Date();
+      var day_in_ms = 1000*60*60*24;
+      for (var i = 0; i < workouts.length; i++) {
+        let date = new Date(workouts[i].date);
+        let diff = (today - date) / day_in_ms;
+        if (diff < 1)
+          $scope.streak += 1;
+        today -= day_in_ms;
+      }
+    }
 
     // GET all workouts
-    $scope.getWorkouts = function() {
+    $scope.getWorkouts = function(next) {
       $http.get('/api/workouts')
         .success(function(data) {
-          console.log(data);
           $scope.workouts = data;
           // convert dates
           for (var i = 0; i < $scope.workouts.length; i++) {
             $scope.workouts[i].date = new Date($scope.workouts[i].date).toDateString();
           }
+          $scope.countStreak(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -83,11 +98,9 @@
         .success(function(data) {
           console.log(data);
           // remove deleted workout (given in response)
-          for (var i = 0; i < $scope.workouts.length; i++) {
-            if ($scope.workouts[i]._id === data.item._id) {
+          for (var i = 0; i < $scope.workouts.length; i++)
+            if ($scope.workouts[i]._id === data.item._id)
               $scope.workouts.splice(i, 1);
-            }
-          }
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -96,12 +109,10 @@
 
     // decide whether to POST or PUT on save
     $scope.decideAction = function() {
-      if ($scope.updateFlag) {
+      if ($scope.updateFlag)
         $scope.saveUpdated();
-      }
-      else {
+      else
         $scope.createWorkout();
-      }
       // reset state variables
       $scope.setUpdateFlag(false);
       $scope.clearFormData();
@@ -112,12 +123,10 @@
     $scope.setView = function(tableVal, formVal) {
       $scope.showTable = tableVal;
       $scope.showForm = formVal;
-      if (tableVal) {
-        $scope.title = "View Workouts";
-      }
-      else {
+      if (tableVal)
+        $scope.title = "Dashboard";
+      else
         $scope.title = "Submit Workout";
-      }
     };
 
     $scope.clickSubmit = function() {

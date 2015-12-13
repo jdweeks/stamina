@@ -34,7 +34,7 @@ html(ng-app="stamina")
                 span.caret
               ul.dropdown-menu(role="menu")
                 li: a(href="#", ng-click="clickSubmit()") Submit
-                li: a(href="#", ng-click="setView(true,false)") View
+                li: a(href="#", ng-click="setView(true,false)") Dashboard
             li: a( href="#about" ) About
             li: a( href="#contact" ) Contact
           ul.nav.navbar-nav.navbar-right
@@ -60,7 +60,7 @@ html(ng-app="stamina")
               p <code>stamina</code> is undergoing a UI overhaul
             #streak
               h3 Streak
-              p Your current streak is <span>{( user.streak }}</span> days
+              p Your current streak is <span>{{ streak }}</span> day(s)
             #volume
               h3 Volume
               p Squat: 

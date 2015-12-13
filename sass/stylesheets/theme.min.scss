@@ -10,12 +10,12 @@ html {
 }
 
 .jumbotron, .col-xs-6, #news, #streak, #volume {
-  border-right: 5px solid $backg;
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff;
 }
 
 .col-xs-6 {
+  border-right: 5px solid $backg;
   text-align: center;
   padding: 0 0 10px 0;
   h3 {

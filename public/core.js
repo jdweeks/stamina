@@ -112,7 +112,6 @@
     $scope.setView = function(tableVal, formVal) {
       $scope.showTable = tableVal;
       $scope.showForm = formVal;
-      $('.navbar-toggle').click();
       if (tableVal) {
         $scope.title = "View Workouts";
       }
@@ -133,6 +132,7 @@
 
     $scope.clearFormData = function() {
       $scope.formData = {};
+      //$('.navbar-toggle').click();
     };
 
   }]);

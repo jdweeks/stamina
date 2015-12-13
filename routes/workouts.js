@@ -17,7 +17,7 @@ router.use(methodOverride( function (req, res) {
 router.route('/')
   // GET all workouts
   .get(function(req, res) {
-    mongoose.model('Workout').find({ 'user': req.user.username }, function (err, workouts) {
+    mongoose.model('Workout').find({ 'user': req.user.username }, null, { sort: '-date'}, function (err, workouts) {
       if (err) {
         res.send('GET Error: There was a problem retrieiving: ' + err);
       }

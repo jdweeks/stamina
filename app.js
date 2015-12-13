@@ -1,7 +1,10 @@
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
+
 var sass = require('node-sass-middleware');
+var compression = require('compression');
+var minify = require('express-minify');
 
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -21,8 +24,7 @@ var app = express();
 app.use(sass({
   src: __dirname + '/sass',
   dest: __dirname + '/public',
-  debug: true,
-  outputStyle: 'compressed'
+  debug: true
 }));
 
 // view engine setup
@@ -33,13 +35,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(compression());
+app.use(minify({cache: __dirname + '/cache'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // authentication setup
 app.use(session({
   secret: 'staminaworkouts',
   resave: false,
-  saveUninitialized: false 
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());

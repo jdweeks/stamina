@@ -3,6 +3,9 @@
 ### Description
 Stamina is a simple web application for logging workouts. It consists of an Angular single-page application that consumes an Express RESTful API. The API connects to a MongoDB to create, read, update, and delete workouts.
 
+### Link
+Try it out [here](http://stamina-logger.herokuapp.com). Disclaimer: This application is a toy project and still under heavy development.
+
 ### Contributing
 All development for this project has been done locally up to this juncture. The API is hosted locally and connects to a local Mongo database. To start hacking as is, you'll need MongoDB and Node.js (plus nodemon for live reload) installed on your machine. Issues and pull requests are welcome.
 

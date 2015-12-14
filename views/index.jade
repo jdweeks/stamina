@@ -25,7 +25,7 @@ html(ng-app="stamina")
             span.icon-bar
             span.icon-bar
           a.navbar-brand Stamina
- 
+
         #mynavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
             li: a(href="#", ng-click="setView(true,false)") Dashboard
@@ -44,61 +44,62 @@ html(ng-app="stamina")
       .jumbotron.text-center
         h2 {{ title }}
       
-      .content(ng-show='showTable')
-        .row
-          .col-xs-6
-            h3 Recent
-            #recent(ng-repeat='w in workouts.slice(-10)')
-              p {{ w.date }}
-              p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
-              button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
-              button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
-          .col-xs-6
-            #streak
-              h3 Streak
-              p Your current streak is <span>{{ streak }}</span> day(s)
-            #volume
-              h3 Volume (Weekly)
-              p Squat: <span>{{ volume.Squat }}</span>
-              p Bench: <span>{{ volume.Bench }}</span>
-              p Deadlift: <span>{{ volume.Deadlift }}</span>
-              p Press: <span>{{ volume.Press }}</span>
-            #records
-              h3 Best Lifts
-              p Squat: <span>{{ records.Squat }}</span>
-              p Bench: <span>{{ records.Bench }}</span>
-              p Deadlift: <span>{{ records.Deadlift }}</span>
-              p Press: <span>{{ records.Press }}</span>
+      .container-fluid
+        .content(ng-show='showTable')
+          .row
+            .col-xs-6
+              h3 Recent
+              #recent(ng-repeat='w in workouts.slice(-10)')
+                p {{ w.date }}
+                p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
+                button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
+                button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
+            .col-xs-6
+              #streak
+                h3 Streak
+                p Your current streak is <span>{{ streak }}</span> day(s)
+              #volume
+                h3 Volume (Weekly)
+                p Squat: <span>{{ volume.Squat }}</span>
+                p Bench: <span>{{ volume.Bench }}</span>
+                p Deadlift: <span>{{ volume.Deadlift }}</span>
+                p Press: <span>{{ volume.Press }}</span>
+              #records
+                h3 Best Lifts
+                p Squat: <span>{{ records.Squat }}</span>
+                p Bench: <span>{{ records.Bench }}</span>
+                p Deadlift: <span>{{ records.Deadlift }}</span>
+                p Press: <span>{{ records.Press }}</span>
 
-      form(novalidate, ng-show="showForm")
-        .form-group
-          p Date: 
-          input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
-          br
-          p Exercise: 
-          select.form-control(type="text", ng-model="formData.exercise")
-            option Bench
-            option Squat
-            option Deadlift
-            option Press
-            option Chin
-          br
-          p Weight: 
-          output(for="weight", id="weightOut")
-          br
-          input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
-          br
-          p Sets:
-          output(for="sets", id="setsOut")
-          br
-          input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
-          br
-          p Reps:
-          output(for="reps", id="repsOut")
-          br
-          input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
-          br
- 
-        button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
+        form(novalidate, ng-show="showForm")
+          .form-group
+            p Date: 
+            input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+            br
+            p Exercise: 
+            select.form-control(type="text", ng-model="formData.exercise")
+              option Bench
+              option Squat
+              option Deadlift
+              option Press
+              option Chin
+            br
+            p Weight: 
+            output(for="weight", id="weightOut")
+            br
+            input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
+            br
+            p Sets:
+            output(for="sets", id="setsOut")
+            br
+            input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
+            br
+            p Reps:
+            output(for="reps", id="repsOut")
+            br
+            input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+            br
+   
+          button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
     br
     br

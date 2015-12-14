@@ -21,3 +21,6 @@ All development for this project has been done locally up to this juncture. The 
 * `views/` -> Jade templates; index.jade contains the view for the angular app
 * `bin/` -> contains the express-generated startup script (www)
 * `sass/` -> sass files to be compiled to css
+
+### Screenshot
+![View](screenshot.png?raw=true)

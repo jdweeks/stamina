@@ -4,6 +4,8 @@
 
   app.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $scope.formData = {};
+    $scope.volume = {};
+    $scope.records = {};
     $scope.workouts = [];
     $scope.updateFlag = false;
     $scope.showTable = true;
@@ -123,10 +125,8 @@
     $scope.setView = function(tableVal, formVal) {
       $scope.showTable = tableVal;
       $scope.showForm = formVal;
-      if (tableVal)
-        $scope.title = "Dashboard";
-      else
-        $scope.title = "Submit Workout";
+      $('.navbar-toggle').click();
+      $scope.title = tableVal ? "Dashboard" : "Submit Workout";
     };
 
     $scope.clickSubmit = function() {
@@ -141,8 +141,36 @@
 
     $scope.clearFormData = function() {
       $scope.formData = {};
-      //$('.navbar-toggle').click();
     };
+
+    $scope.getVolume = function(name) {
+      $http.get('/api/volume?name=' + name)
+        .success(function(data) {
+          $scope.volume[name] = data;
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    };
+    $scope.getVolume('Squat');
+    $scope.getVolume('Bench');
+    $scope.getVolume('Deadlift');
+    $scope.getVolume('Press');
+
+    $scope.getRecords = function(name) {
+      $http.get('/api/records?name=' + name)
+        .success(function(data) {
+          $scope.records[name] = data;
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+    }
+    $scope.getRecords('Squat');
+    $scope.getRecords('Bench');
+    $scope.getRecords('Deadlift');
+    $scope.getRecords('Press');
+
 
   }]);
 })();

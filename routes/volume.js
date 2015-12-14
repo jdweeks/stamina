@@ -7,11 +7,15 @@ router.get('/?', function(req, res) {
       'user': req.user.username,
       'exercise': req.query.name
   };
-  mongoose.model('Workout').find(query, function(err, data) {
+  mongoose.model('Workout').find(query).sort({'date': -1}).limit(7).exec(function(err, data) {
     var vol = 0;
+    var day_in_ms = 1000*60*60*24;
+    var today = new Date();
     for (var j = 0; j < data.length; j++) {
       var curr = data[j];
-      vol += parseInt(curr.weight, 10) * parseInt(curr.sets, 10) * parseInt(curr.reps, 10);
+      var diff = (today - new Date(curr.date)) / day_in_ms;
+      if (diff < 8)
+        vol += parseInt(curr.weight, 10) * parseInt(curr.sets, 10) * parseInt(curr.reps, 10);
     }
     res.json(vol);
   });

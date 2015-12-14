@@ -24,17 +24,16 @@ html(ng-app="stamina")
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#", ng-click="setView(true,false)") Stamina
+          a.navbar-brand Stamina
  
         #mynavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li: a(href="#", ng-click="setView(true,false)") Home
+            li: a(href="#", ng-click="setView(true,false)") Dashboard
             li.dropdown
-              a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Menu 
+              a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
                 span.caret
               ul.dropdown-menu(role="menu")
                 li: a(href="#", ng-click="clickSubmit()") Submit
-                li: a(href="#", ng-click="setView(true,false)") Dashboard
             li: a( href="#about" ) About
             li: a( href="#contact" ) Contact
           ul.nav.navbar-nav.navbar-right
@@ -55,24 +54,21 @@ html(ng-app="stamina")
               button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
               button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
           .col-xs-6
-            #news
-              h3 News
-              p <code>stamina</code> is undergoing a UI overhaul
             #streak
               h3 Streak
               p Your current streak is <span>{{ streak }}</span> day(s)
             #volume
-              h3 Volume
-              p Squat: 
-              p Deadlift:
-              p Press:
-              p Bench:
+              h3 Volume (Weekly)
+              p Squat: <span>{{ volume.Squat }}</span>
+              p Bench: <span>{{ volume.Bench }}</span>
+              p Deadlift: <span>{{ volume.Deadlift }}</span>
+              p Press: <span>{{ volume.Press }}</span>
             #records
-              h3 Records
-              p Squat:
-              p Deadlift:
-              p Press:
-              p Bench: 
+              h3 Best Lifts
+              p Squat: <span>{{ records.Squat }}</span>
+              p Bench: <span>{{ records.Bench }}</span>
+              p Deadlift: <span>{{ records.Deadlift }}</span>
+              p Press: <span>{{ records.Press }}</span>
 
       form(novalidate, ng-show="showForm")
         .form-group
@@ -81,7 +77,7 @@ html(ng-app="stamina")
           br
           p Exercise: 
           select.form-control(type="text", ng-model="formData.exercise")
-            option Bench Press
+            option Bench
             option Squat
             option Deadlift
             option Press

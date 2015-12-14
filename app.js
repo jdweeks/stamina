@@ -19,6 +19,8 @@ var localStategy = require('passport-local').Strategy;
 var routes = require('./routes/index');
 var workouts = require('./routes/workouts');
 var volume = require('./routes/volume');
+var records = require('./routes/records');
+
 var app = express();
 
 // sass setup
@@ -54,6 +56,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/api/workouts', workouts);
 app.use('/api/volume', volume)
+app.use('/api/records', records);
 
 // passport config
 var account = require('./model/account');

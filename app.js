@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
+var favicon = require('serve-favicon');
 
 var sass = require('node-sass-middleware');
 var compression = require('compression');
@@ -63,6 +64,9 @@ var account = require('./model/account');
 passport.use(new localStategy(account.authenticate()));
 passport.serializeUser(account.serializeUser());
 passport.deserializeUser(account.deserializeUser());
+
+// favicon
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

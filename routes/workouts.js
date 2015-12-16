@@ -17,13 +17,15 @@ router.use(methodOverride( function (req, res) {
 router.route('/')
   // GET all workouts
   .get(function(req, res) {
+    if (!req.user) {
+      res.send('Error: unauthorized user');
+      return console.error('unauthorized user');
+    }
     mongoose.model('Workout').find({ 'user': req.user.username }, null, { sort: '-date'}, function (err, workouts) {
-      if (err) {
+      if (err)
         res.send('GET Error: There was a problem retrieiving: ' + err);
-      }
-      else {
+      else
         res.json(workouts);
-      }
     });
   })
 
@@ -38,12 +40,10 @@ router.route('/')
       reps: req.body.reps
     },
     function (err, workout) {
-      if (err) {
+      if (err)
         res.send('POST Error: There was a problem creating: ' + err);
-      }
-      else {
+      else
         res.json(workout);
-      }
     })
   });
 
@@ -70,9 +70,8 @@ router.route('/:id')
   // GET individual workout
   .get(function(req, res) {
     mongoose.model('Workout').findById(req.id, function(err, workout) {
-      if (err) {
+      if (err)
         res.send('GET Error: There was a problem retrieving: ' + err);
-      }
       else {
         console.log('GET retrieving ID: ' + workout._id);
         res.json(workout);
@@ -92,12 +91,10 @@ router.put('/:id', function(req, res) {
     workout.rep = req.body.reps;
 
     workout.save(function (err) {
-      if (err) {
+      if (err)
         res.send('PUT Error: There was a problem updating: ' + err);
-      }
-      else {
+      else
         res.json(workout);
-      }
     });
   });
 });
@@ -111,9 +108,8 @@ router.delete('/:id', function (req, res) {
     }
     else {
       workout.remove( function(err, workout) {
-        if (err) {
+        if (err)
           return console.error(err);
-        }
         else {
           console.log('DELETEing ID: ' + workout._id);
           res.json({

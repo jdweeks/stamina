@@ -16,13 +16,17 @@
     // count user's streak in days
     $scope.countStreak = function(workouts) {
       var today = new Date();
+      var prev = new Date();
       var day_in_ms = 1000*60*60*24;
+
       for (var i = 0; i < workouts.length; i++) {
         var date = new Date(workouts[i].date);
         var diff = (today - date) / day_in_ms;
-        if (diff < 1)
-          $scope.streak += 1;
+        if (diff < 1 && (date - prev !== 0))
+          $scope.streak++;;
+
         today -= day_in_ms;
+        prev = date;
       }
     }
 
@@ -32,9 +36,8 @@
         .success(function(data) {
           $scope.workouts = data;
           // convert dates
-          for (var i = 0; i < $scope.workouts.length; i++) {
+          for (var i = 0; i < $scope.workouts.length; i++)
             $scope.workouts[i].date = new Date($scope.workouts[i].date).toDateString();
-          }
           $scope.countStreak(data);
         })
         .error(function(data) {
@@ -44,13 +47,17 @@
     $scope.getWorkouts();
 
     // when submitting add form, POST to API
-    $scope.createWorkout = function() {
+    $scope.createWorkout = function(next) {
       $http.post('/api/workouts', $scope.formData)
         .success(function(data) {
           console.log(data);
           // append newly created workout (given in response)
           data.date = new Date(data.date).toDateString();
           $scope.workouts.push(data);
+
+          // next($scope.workouts); // update streak
+          $scope.getVolume(data.exercise); // update volume
+          $scope.getRecords(data.exercise); // update records
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -69,6 +76,7 @@
             sets: $scope.workouts[i].sets,
             reps: $scope.workouts[i].reps
           };
+
           $scope.setUpdateFlag(true);
           $scope.setView(false, true);
           $scope.title = "Update Workout";
@@ -77,17 +85,22 @@
     };
 
     // update workout by PUT request
-    $scope.saveUpdated = function() {
+    $scope.saveUpdated = function(next) {
       $http.put('/api/workouts/'+$scope.workouts[$scope.workoutIndex]._id, $scope.formData)
         .success(function(data) {
           console.log(data);
           $scope.workouts[$scope.workoutIndex] = {
+            _id: data._id,
             date: new Date(data.date).toDateString(),
             exercise: data.exercise,
             weight: data.weight,
             sets: data.sets,
             reps: data.reps
           };
+
+          // next($scope.workouts); // update streak
+          $scope.getVolume(data.exercise); // update volume
+          $scope.getRecords(data.exercise); // update records
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -103,6 +116,9 @@
           for (var i = 0; i < $scope.workouts.length; i++)
             if ($scope.workouts[i]._id === data.item._id)
               $scope.workouts.splice(i, 1);
+
+          $scope.getVolume(data.item.exercise); // update volume
+          $scope.getRecords(data.item.exercise); // update records
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -112,9 +128,11 @@
     // decide whether to POST or PUT on save
     $scope.decideAction = function() {
       if ($scope.updateFlag)
-        $scope.saveUpdated();
-      else
-        $scope.createWorkout();
+        $scope.saveUpdated($scope.countStreak);
+      else {
+        $scope.createWorkout($scope.countStreak);
+        $('.navbar-toggle').click();
+      }
       // reset state variables
       $scope.setUpdateFlag(false);
       $scope.clearFormData();
@@ -125,22 +143,26 @@
     $scope.setView = function(tableVal, formVal) {
       $scope.showTable = tableVal;
       $scope.showForm = formVal;
+
       $('.navbar-toggle').click();
       $scope.title = tableVal ? "Dashboard" : "Submit Workout";
-    };
 
-    $scope.clickSubmit = function() {
-      $scope.setUpdateFlag(false);
-      $scope.clearFormData();
-      $scope.setView(false,true);
-    };
+      // reset output values for form
+      var weightOut = document.getElementById('weightOut');
+      var setsOut = document.getElementById('setsOut');
+      var repsOut = document.getElementById('repsOut');
 
-    $scope.setUpdateFlag = function(val) {
-      $scope.updateFlag = val;
-    };
+      var weight = document.getElementById('weight');
+      var sets = document.getElementById('sets');
+      var reps = document.getElementById('reps');
 
-    $scope.clearFormData = function() {
-      $scope.formData = {};
+      var wavg = (Number(weight.max) + Number(weight.min)) / 2;
+      var savg = (Number(sets.max) + Number(sets.min)) / 2;
+      var ravg = (Number(reps.max) + Number(reps.min)) / 2;
+
+      weightOut.innerHTML = $scope.formData.weight || wavg;
+      setsOut.innerHTML = $scope.formData.sets || savg;
+      repsOut.innerHTML = $scope.formData.reps || ravg;
     };
 
     $scope.getVolume = function(name) {
@@ -171,6 +193,19 @@
     $scope.getRecords('Deadlift');
     $scope.getRecords('Press');
 
+    $scope.clickSubmit = function() {
+      $scope.setUpdateFlag(false);
+      $scope.clearFormData();
+      $scope.setView(false,true);
+    };
+
+    $scope.setUpdateFlag = function(val) {
+      $scope.updateFlag = val;
+    };
+
+    $scope.clearFormData = function() {
+      $scope.formData = {};
+    };
 
   }]);
 })();

@@ -3,6 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 router.get('/?', function(req, res) {
+  if (!req.user) {
+    res.send('Error: unauthorized user');
+    return console.error('unauthorized user');
+  }
   var query = {
       'user': req.user.username,
       'exercise': req.query.name

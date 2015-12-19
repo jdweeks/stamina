@@ -73,28 +73,32 @@ html(ng-app="stamina")
 
         form(novalidate, ng-show="showForm")
           .form-group
-            p Date: 
-            input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+            label(for="date") Date:
+            input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
             br
-            p Exercise: 
-            select.form-control(type="text", ng-model="formData.exercise")
+            
+            label(for="exercise") Exercise: 
+            select.form-control(type="text", id="exercise" ng-model="formData.exercise")
               option Bench
               option Squat
               option Deadlift
               option Press
               option Chin
             br
-            p Weight: 
+            
+            label(for="weight") Weight: 
             output(for="weight", id="weightOut")
             br
             input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
             br
-            p Sets:
+            
+            label(for="sets") Sets:
             output(for="sets", id="setsOut")
             br
             input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
             br
-            p Reps:
+            
+            label(for="reps") Reps:
             output(for="reps", id="repsOut")
             br
             input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")

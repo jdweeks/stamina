@@ -28,24 +28,24 @@ html(ng-app="stamina")
 
         #mynavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li: a(href="#", ng-click="setView(true,false)") Dashboard
+            li: a(ng-click="setView({ table: true })") Dashboard
             li.dropdown
-              a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
+              a.dropdown-toggle(data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
                 span.caret
               ul.dropdown-menu(role="menu")
-                li: a(href="#", ng-click="clickSubmit()") Submit
-            li: a( href="#about" ) About
-            li: a( href="#contact" ) Contact
+                li: a(ng-click="clickSubmit()") Submit
+            li: a(ng-click="setView({ about: true })") About
+            li: a(ng-click="setView({ contact: true })") Contact
           ul.nav.navbar-nav.navbar-right
             if (user)
-              li: a( id='username' ) #{user.username}
-            li: a( href="/logout") Logout
+              li: a(id='username') #{user.username}
+            li: a(href="/logout") Logout
 
       .jumbotron.text-center
         h2 {{ title }}
       
       .container-fluid
-        .content(ng-show='showTable')
+        .content(ng-show='show.table')
           .row
             .col-xs-6
               h3 Recent
@@ -71,7 +71,7 @@ html(ng-app="stamina")
                 p Deadlift: <span>{{ records.Deadlift }}</span>
                 p Press: <span>{{ records.Press }}</span>
 
-        form(novalidate, ng-show="showForm")
+        form(novalidate, ng-show="show.form")
           .form-group
             label(for="date") Date:
             input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
@@ -105,5 +105,15 @@ html(ng-app="stamina")
             br
    
           button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-    br
-    br
+          br
+          br
+          
+        #about(ng-show='show.about')
+          ul
+            li <code>stamina</code> is a simple webapp for logging lifting sessions.
+            br
+            li View the project on&nbsp;
+              a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
+              
+        #contact(ng-show='show.contact')
+          p Contact page is coming soon.

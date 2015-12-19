@@ -7,11 +7,23 @@
     $scope.volume = {};
     $scope.records = {};
     $scope.workouts = [];
+
     $scope.updateFlag = false;
-    $scope.showTable = true;
-    $scope.showForm = false;
     $scope.streak = 0;
+
     $scope.title = "Dashboard";
+    $scope.show = {
+      table: true,
+      form: false,
+      about: false,
+      contact: false
+    };
+    $scope.titles = {
+      table: "Dashboard",
+      form: "Submit",
+      about: "About",
+      contact: "Contact"
+    };
 
     // count user's streak in days
     $scope.countStreak = function(workouts) {
@@ -78,7 +90,7 @@
           };
 
           $scope.setUpdateFlag(true);
-          $scope.setView(false, true);
+          $scope.setView({ form: true });
           $scope.title = "Update Workout";
         }
       }
@@ -136,16 +148,20 @@
       // reset state variables
       $scope.setUpdateFlag(false);
       $scope.clearFormData();
-      $scope.setView(true, false);
+      $scope.setView({ table: true });
     };
 
     // decide which elements are shown in view
-    $scope.setView = function(tableVal, formVal) {
-      $scope.showTable = tableVal;
-      $scope.showForm = formVal;
+    $scope.setView = function(obj) {
+      // reset view
+      for (var prop in $scope.show)
+        $scope.show[prop] = false;
 
-      $('.navbar-toggle').click();
-      $scope.title = tableVal ? "Dashboard" : "Submit Workout";
+      // set view
+      for (var prop in obj) {
+        $scope.show[prop] = true;
+        $scope.title = $scope.titles[prop];
+      }
 
       // reset output values for form
       var weightOut = document.getElementById('weightOut');
@@ -163,6 +179,8 @@
       weightOut.innerHTML = $scope.formData.weight || wavg;
       setsOut.innerHTML = $scope.formData.sets || savg;
       repsOut.innerHTML = $scope.formData.reps || ravg;
+
+      $('.navbar-toggle').click();
     };
 
     $scope.getVolume = function(name) {
@@ -196,7 +214,7 @@
     $scope.clickSubmit = function() {
       $scope.setUpdateFlag(false);
       $scope.clearFormData();
-      $scope.setView(false,true);
+      $scope.setView({ form: true });
     };
 
     $scope.setUpdateFlag = function(val) {

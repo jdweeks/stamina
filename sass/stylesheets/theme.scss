@@ -1,17 +1,22 @@
-$fontStack: serif;
 $backg: #f1f1f1;
 
-html {
-  font-family: 100% $fontStack;
-  body {
-    margin:0;
-    background: $backg !important;
-  }
+body {
+  margin:0;
+  background: $backg !important;
 }
 
-.jumbotron, .col-xs-6, #streak, #volume {
+.jumbotron, .col-xs-6, #streak, #volume, #about, #contact {
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff;
+}
+
+#about, #contact {
+  padding: 20px;
+  text-align: center;
+  ul {
+    list-style-type: none;
+    padding-left: 10px;
+  }
 }
 
 .col-xs-6 {

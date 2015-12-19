@@ -1,12 +1,17 @@
-html {
-  font-family: 100% serif; }
-  html body {
-    margin: 0;
-    background: #f1f1f1 !important; }
+body {
+  margin: 0;
+  background: #f1f1f1 !important; }
 
-.jumbotron, .col-xs-6, #streak, #volume {
+.jumbotron, .col-xs-6, #streak, #volume, #about, #contact {
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff; }
+
+#about, #contact {
+  padding: 20px;
+  text-align: center; }
+  #about ul, #contact ul {
+    list-style-type: none;
+    padding-left: 10px; }
 
 .col-xs-6 {
   border-right: 5px solid #f1f1f1;

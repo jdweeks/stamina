@@ -2,16 +2,19 @@ body {
   margin: 0;
   background: #f1f1f1 !important; }
 
-.jumbotron, .col-xs-6, #streak, #volume, #about, #contact {
+.jumbotron, .col-xs-6, #streak, #volume, #about {
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff; }
 
-#about, #contact {
-  padding: 20px;
+#about, footer {
+  padding: 10px;
   text-align: center; }
-  #about ul, #contact ul {
+  #about ul, footer ul {
     list-style-type: none;
-    padding-left: 10px; }
+    padding-left: 0; }
+
+.footer-list li {
+  display: inline; }
 
 .col-xs-6 {
   border-right: 5px solid #f1f1f1;
@@ -36,3 +39,6 @@ span {
 
 button.btn.btn-primary.pull-right {
   background-color: #222222; }
+
+.popover {
+  max-width: 100%; }

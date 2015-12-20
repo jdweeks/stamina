@@ -5,18 +5,22 @@ body {
   background: $backg !important;
 }
 
-.jumbotron, .col-xs-6, #streak, #volume, #about, #contact {
+.jumbotron, .col-xs-6, #streak, #volume, #about {
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff;
 }
 
-#about, #contact {
-  padding: 20px;
+#about, footer {
+  padding: 10px;
   text-align: center;
   ul {
     list-style-type: none;
-    padding-left: 10px;
+    padding-left: 0;
   }
+}
+
+.footer-list li {
+  display: inline;
 }
 
 .col-xs-6 {
@@ -48,4 +52,8 @@ span {
 
 button.btn.btn-primary.pull-right {
   background-color: #222222;
+}
+
+.popover {
+  max-width: 100%;
 }

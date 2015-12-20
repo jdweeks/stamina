@@ -34,7 +34,7 @@ html(ng-app="stamina")
                 span.caret
               ul.dropdown-menu(role="menu")
                 li: a(ng-click="clickSubmit()") Submit
-            li: a(ng-click="setView({ about: true })") About
+            li: a(href="https://github.com/jdweeks/stamina", target="_blank") About
             li: a(href="mailto:jdweeks@g.clemson.edu?subject=Stamina%20Feedback") Contact
           ul.nav.navbar-nav.navbar-right
             if (user)
@@ -105,17 +105,19 @@ html(ng-app="stamina")
             br
    
           button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-          
-        #about(ng-show='show.about')
-          ul
-            li <code>stamina</code> is a simple webapp for logging lifting sessions.
-            br
-            li View the project on&nbsp;
-              a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
-              
-        //- #contact(ng-show='show.contact')
-        //-   form.form-group
-        //-     label
-          
-      br
-      br
+        
+    .container-fluid    
+      #about(ng-show='show.about')
+        ul
+          li <code>stamina</code> is a simple webapp for logging lifting sessions.
+          br
+          li View the project on&nbsp;
+            a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
+    br
+    br
+    
+  footer
+    ul.footer-list
+      li &copy; 2015 Joseph Weeks |&nbsp;
+      li Licensed under&nbsp;
+        a(href="https://raw.githubusercontent.com/jdweeks/stamina/master/LICENSE.md", target="_blank") MIT

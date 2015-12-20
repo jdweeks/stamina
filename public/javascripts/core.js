@@ -15,14 +15,12 @@
     $scope.show = {
       table: true,
       form: false,
-      about: false,
-      contact: false
+      about: false
     };
     $scope.titles = {
       table: "Dashboard",
       form: "Submit",
-      about: "About",
-      contact: "Contact"
+      about: "About"
     };
 
     // count user's streak in days
@@ -35,7 +33,7 @@
         var date = new Date(workouts[i].date);
         var diff = (today - date) / day_in_ms;
         if (diff < 1 && (date - prev !== 0))
-          $scope.streak++;;
+          $scope.streak++;
 
         today -= day_in_ms;
         prev = date;
@@ -205,7 +203,7 @@
         .error(function(data) {
           console.log('Error: ' + data);
         });
-    }
+    };
     $scope.getRecords('Squat');
     $scope.getRecords('Bench');
     $scope.getRecords('Deadlift');

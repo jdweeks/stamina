@@ -35,7 +35,7 @@ html(ng-app="stamina")
               ul.dropdown-menu(role="menu")
                 li: a(ng-click="clickSubmit()") Submit
             li: a(ng-click="setView({ about: true })") About
-            li: a(ng-click="setView({ contact: true })") Contact
+            li: a(href="mailto:jdweeks@g.clemson.edu?subject=Stamina%20Feedback") Contact
           ul.nav.navbar-nav.navbar-right
             if (user)
               li: a(id='username') #{user.username}
@@ -105,8 +105,6 @@ html(ng-app="stamina")
             br
    
           button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-          br
-          br
           
         #about(ng-show='show.about')
           ul
@@ -115,5 +113,9 @@ html(ng-app="stamina")
             li View the project on&nbsp;
               a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
               
-        #contact(ng-show='show.contact')
-          p Contact page is coming soon.
+        //- #contact(ng-show='show.contact')
+        //-   form.form-group
+        //-     label
+          
+      br
+      br

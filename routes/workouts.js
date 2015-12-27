@@ -26,9 +26,9 @@ router.route('/')
       if (err) {
         res.status(500);
         res.send('GET Error: There was a problem retrieiving: ' + err);
+        return;
       }
-      else
-        res.json(workouts);
+      res.json(workouts);
     });
   })
 
@@ -51,9 +51,9 @@ router.route('/')
       if (err) {
         res.status(500);
         res.send('POST Error: There was a problem creating: ' + err);
+        return;
       }
-      else
-        res.json(workout);
+      res.json(workout);
     })
   });
 
@@ -83,9 +83,9 @@ router.route('/:id')
       if (err) {
         res.status(500);
         res.send('GET Error: There was a problem retrieving: ' + err);
+        return;
       }
-      else 
-        res.json(workout);
+      res.json(workout);
     });
   });
 
@@ -115,9 +115,9 @@ router.put('/:id', function(req, res) {
       if (err) {
         res.status(500);
         res.send('PUT Error: There was a problem updating: ' + err);
+        return;
       }
-      else
-        res.json(workout);
+      res.json(workout);
     });
   });
 });
@@ -128,21 +128,19 @@ router.delete('/:id', function (req, res) {
     if (err) {
       res.status(400);
       res.send('DELETE Error: There was a problem deleting: ' + err);
+      return;
     }
-    else {
-      workout.remove( function(err, workout) {
-        if (err) {
-          res.status(500);
-          res.send('DELETE Error: There was a problem deleting: ' + err);
-        }
-        else {
-          res.json({
-            message: 'deleted',
-            item: workout
-          });
-        }
+    workout.remove( function(err, workout) {
+      if (err) {
+        res.status(500);
+        res.send('DELETE Error: There was a problem deleting: ' + err);
+        return;
+      }
+      res.json({
+        message: 'deleted',
+        item: workout
       });
-    }
+    });
   });
 });
 

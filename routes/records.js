@@ -4,14 +4,21 @@ var mongoose = require('mongoose');
 
 router.get('/?', function(req, res) {
   if (!req.user) {
+    res.status(401);
     res.send('Error: unauthorized user');
-    return console.error('unauthorized user');
+    return;
   }
   var query = {
       'user': req.user.username,
       'exercise': req.query.name
   };
   mongoose.model('Workout').find(query, function(err, data) {
+    if (err) {
+      res.status(500);
+      res.send('Error retrieving');
+      return;
+    }
+    
     var max = 0;
     for (var j = 0; j < data.length; j++) {
       var curr = data[j];

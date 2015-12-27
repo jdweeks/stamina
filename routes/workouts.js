@@ -18,12 +18,15 @@ router.route('/')
   // GET all workouts
   .get(function(req, res) {
     if (!req.user) {
+      res.status(401);
       res.send('Error: unauthorized user');
-      return console.error('unauthorized user');
+      return;
     }
     mongoose.model('Workout').find({ 'user': req.user.username }, null, { sort: '-date'}, function (err, workouts) {
-      if (err)
+      if (err) {
+        res.status(500);
         res.send('GET Error: There was a problem retrieiving: ' + err);
+      }
       else
         res.json(workouts);
     });
@@ -31,6 +34,11 @@ router.route('/')
 
   // POST a new workout
   .post(function(req, res) {
+    if (!req.user) {
+      res.status(401);
+      res.send('Error: unauthorized user');
+      return;
+    }
     mongoose.model('Workout').create( {
       user: req.user.username,
       date: req.body.date,
@@ -40,8 +48,10 @@ router.route('/')
       reps: req.body.reps
     },
     function (err, workout) {
-      if (err)
+      if (err) {
+        res.status(500);
         res.send('POST Error: There was a problem creating: ' + err);
+      }
       else
         res.json(workout);
     })
@@ -70,19 +80,30 @@ router.route('/:id')
   // GET individual workout
   .get(function(req, res) {
     mongoose.model('Workout').findById(req.id, function(err, workout) {
-      if (err)
+      if (err) {
+        res.status(500);
         res.send('GET Error: There was a problem retrieving: ' + err);
-      else {
-        console.log('GET retrieving ID: ' + workout._id);
-        res.json(workout);
       }
+      else 
+        res.json(workout);
     });
   });
 
 // PUT to update workout
 router.put('/:id', function(req, res) {
+  if (!req.user) {
+    res.status(401);
+    res.send('Error: unauthorized user');
+    return;
+  }  
   // find workout by ID and update
   mongoose.model('Workout').findById(req.id, function (err, workout) {
+    if (err) {
+      res.status(400);
+      res.send('PUT Error: There was a problem updating: ' + err);
+      return;
+    }
+    
     workout.user = req.user.username;
     workout.date = req.body.date;
     workout.exercise = req.body.exercise;
@@ -91,8 +112,10 @@ router.put('/:id', function(req, res) {
     workout.rep = req.body.reps;
 
     workout.save(function (err) {
-      if (err)
+      if (err) {
+        res.status(500);
         res.send('PUT Error: There was a problem updating: ' + err);
+      }
       else
         res.json(workout);
     });
@@ -103,15 +126,16 @@ router.put('/:id', function(req, res) {
 router.delete('/:id', function (req, res) {
   mongoose.model('Workout').findById(req.id, function(err, workout) {
     if (err) {
+      res.status(400);
       res.send('DELETE Error: There was a problem deleting: ' + err);
-      return console.error(err);
     }
     else {
       workout.remove( function(err, workout) {
-        if (err)
-          return console.error(err);
+        if (err) {
+          res.status(500);
+          res.send('DELETE Error: There was a problem deleting: ' + err);
+        }
         else {
-          console.log('DELETEing ID: ' + workout._id);
           res.json({
             message: 'deleted',
             item: workout

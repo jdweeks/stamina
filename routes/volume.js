@@ -4,14 +4,21 @@ var mongoose = require('mongoose');
 
 router.get('/?', function(req, res) {
   if (!req.user) {
+    res.status(401);
     res.send('Error: unauthorized user');
-    return console.error('unauthorized user');
+    return;
   }
   var query = {
       'user': req.user.username,
       'exercise': req.query.name
   };
   mongoose.model('Workout').find(query).sort({'date': -1}).limit(7).exec(function(err, data) {
+    if (err) {
+      res.status(500);
+      res.send('Error retrieving');
+      return;
+    }
+    
     var vol = 0;
     var day_in_ms = 1000*60*60*24;
     var today = new Date();

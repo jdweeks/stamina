@@ -13,13 +13,13 @@ body {
 #about, footer {
   padding: 10px;
   text-align: center;
-  ul {
+  > ul {
     list-style-type: none;
     padding-left: 0;
   }
 }
 
-.footer-list li {
+.footer-list > li {
   display: inline;
 }
 
@@ -31,10 +31,11 @@ body {
     font-style: oblique;
     padding-bottom: 10px;
   }
-  #recent {
-    border-top: 2px dotted #e5e5e5;
-    padding-top: 10px;
-  }
+}
+
+#recent {
+  border-top: 2px dotted #e5e5e5;
+  padding-top: 10px;
 }
 
 output {
@@ -50,10 +51,7 @@ span {
   color: red;
 }
 
-button.btn.btn-primary.pull-right {
+.pull-right {
   background-color: #222222;
 }
 
-.popover {
-  max-width: 100%;
-}

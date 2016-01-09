@@ -34,8 +34,8 @@ html(ng-app="stamina")
                 span.caret
               ul.dropdown-menu(role="menu")
                 li: a(ng-click="clickSubmit()") Submit
-            li: a(href="https://github.com/jdweeks/stamina", target="_blank") About
-            li: a(href="mailto:jdweeks@g.clemson.edu?subject=Stamina%20Feedback") Contact
+            li: a(ng-click="setView({ about: true })") About
+            li: a(ng-click="setView({ contact: true })") Contact
           ul.nav.navbar-nav.navbar-right
             if (user)
               li: a(id='username') #{user.username}
@@ -71,53 +71,64 @@ html(ng-app="stamina")
                 p Deadlift: <span>{{ records.Deadlift }}</span>
                 p Press: <span>{{ records.Press }}</span>
 
-        form(novalidate, ng-show="show.form")
-          .form-group
-            label(for="date") Date:
-            input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
-            br
+      form(novalidate, ng-show="show.form")
+        .form-group
+          label(for="date") Date:
+          input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+          br
+           
+          label(for="exercise") Exercise: 
+          select.form-control(type="text", id="exercise" ng-model="formData.exercise")
+            option Bench
+            option Squat
+            option Deadlift
+            option Press
+            option Chin
+          br
             
-            label(for="exercise") Exercise: 
-            select.form-control(type="text", id="exercise" ng-model="formData.exercise")
-              option Bench
-              option Squat
-              option Deadlift
-              option Press
-              option Chin
-            br
+          label(for="weight") Weight: 
+          output(for="weight", id="weightOut")
+          br
+          input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
+          br
             
-            label(for="weight") Weight: 
-            output(for="weight", id="weightOut")
-            br
-            input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
-            br
+          label(for="sets") Sets:
+          output(for="sets", id="setsOut")
+          br
+          input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
+          br
             
-            label(for="sets") Sets:
-            output(for="sets", id="setsOut")
-            br
-            input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
-            br
-            
-            label(for="reps") Reps:
-            output(for="reps", id="repsOut")
-            br
-            input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
-            br
+          label(for="reps") Reps:
+          output(for="reps", id="repsOut")
+          br
+          input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+          br
    
-          button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-        
-    .container-fluid    
+        button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
+       
+    .container-fluid 
       #about(ng-show='show.about')
         ul
           li <code>stamina</code> is a simple webapp for logging lifting sessions.
           br
           li View the project on&nbsp;
             a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
+    
+      form(id='contact', novalidate, ng-show='show.contact')
+        .form-group
+          label(for="reason") Subject
+          select.form-control(type="select", name="reason")
+            option Report a bug
+            option Suggest a feature
+            option Give us your feedback
+
+
     br
     br
+
     
   footer
     ul.footer-list
-      li &copy; 2015 Joseph Weeks |&nbsp;
+      li &copy; 2016 Joseph Weeks |&nbsp;
       li Licensed under&nbsp;
         a(href="https://raw.githubusercontent.com/jdweeks/stamina/master/LICENSE.md", target="_blank") MIT

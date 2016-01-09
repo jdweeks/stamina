@@ -14,11 +14,15 @@
     $scope.title = "Dashboard";
     $scope.show = {
       table: true,
-      form: false
+      form: false,
+      about: false,
+      contact: false
     };
     $scope.titles = {
       table: "Dashboard",
-      form: "Submit"
+      form: "Submit",
+      about: "About",
+      contact: "Contact"
     };
 
     // count user's streak in days

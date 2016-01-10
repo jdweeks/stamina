@@ -12,123 +12,120 @@ html(ng-app="stamina")
     script(src="/javascripts/core.js" type="text/javascript")
 
   body(ng-controller="mainController")
-    .container-fluid
-
-      if (!user)
-        script window.location='/login'
-
-      nav.navbar.navbar-inverse(role="navigation")
-        .navbar-header
-          button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#mynavbar", aria-expanded="false", aria-controls="navbar")
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand Stamina
-
-        #mynavbar.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li: a(ng-click="setView({ table: true })") Dashboard
-            li.dropdown
-              a.dropdown-toggle(data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
-                span.caret
-              ul.dropdown-menu(role="menu")
-                li: a(ng-click="clickSubmit()") Submit
-            li: a(ng-click="setView({ about: true })") About
-            li: a(ng-click="setView({ contact: true })") Contact
-          ul.nav.navbar-nav.navbar-right
-            if (user)
-              li: a(id='username') #{user.username}
-            li: a(href="/logout") Logout
-
-      .jumbotron.text-center
-        h2 {{ title }}
-      
+    #wrapper 
       .container-fluid
-        .content(ng-show='show.table')
-          .row
-            .col-xs-6
-              h3 Recent
-              #recent(ng-repeat='w in workouts.slice(-10)')
-                p {{ w.date }}
-                p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
-                button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
-                button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
-            .col-xs-6
-              #streak
-                h3 Streak
-                p Your current streak is <span>{{ streak }}</span> day(s)
-              #volume
-                h3 Volume (Weekly)
-                p Squat: <span>{{ volume.Squat }}</span>
-                p Bench: <span>{{ volume.Bench }}</span>
-                p Deadlift: <span>{{ volume.Deadlift }}</span>
-                p Press: <span>{{ volume.Press }}</span>
-              #records
-                h3 Best Lifts
-                p Squat: <span>{{ records.Squat }}</span>
-                p Bench: <span>{{ records.Bench }}</span>
-                p Deadlift: <span>{{ records.Deadlift }}</span>
-                p Press: <span>{{ records.Press }}</span>
 
-      form(novalidate, ng-show="show.form")
-        .form-group
-          label(for="date") Date:
-          input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
-          br
-           
-          label(for="exercise") Exercise: 
-          select.form-control(type="text", id="exercise" ng-model="formData.exercise")
-            option Bench
-            option Squat
-            option Deadlift
-            option Press
-            option Chin
-          br
-            
-          label(for="weight") Weight: 
-          output(for="weight", id="weightOut")
-          br
-          input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
-          br
-            
-          label(for="sets") Sets:
-          output(for="sets", id="setsOut")
-          br
-          input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
-          br
-            
-          label(for="reps") Reps:
-          output(for="reps", id="repsOut")
-          br
-          input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
-          br
-   
-        button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
-       
-    .container-fluid 
-      #about(ng-show='show.about')
-        ul
-          li <code>stamina</code> is a simple webapp for logging lifting sessions.
-          br
-          li View the project on&nbsp;
-            a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
-    
-      form(id='contact', novalidate, ng-show='show.contact')
-        .form-group
-          label(for="reason") Subject
-          select.form-control(type="select", name="reason")
-            option Report a bug
-            option Suggest a feature
-            option Give us your feedback
+        if (!user)
+          script window.location='/login'
 
+        nav.navbar.navbar-inverse(role="navigation")
+          .navbar-header
+            button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#mynavbar", aria-expanded="false", aria-controls="navbar")
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand Stamina
+
+          #mynavbar.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li: a(ng-click="setView({ table: true })") Dashboard
+              li.dropdown
+                a.dropdown-toggle(data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li: a(ng-click="clickSubmit()") Submit
+              li: a(ng-click="setView({ about: true })") About
+              li: a(ng-click="setView({ contact: true })") Contact
+            ul.nav.navbar-nav.navbar-right
+              if (user)
+                li: a(id='username') #{user.username}
+              li: a(href="/logout") Logout
+
+        .jumbotron.text-center
+          h2 {{ title }}
+        
+        .container-fluid
+          .content(ng-show='show.table')
+            .row
+              .col-xs-6
+                h3 Recent
+                #recent(ng-repeat='w in workouts.slice(-10)')
+                  p {{ w.date }}
+                  p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
+                  button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
+                  button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
+              .col-xs-6
+                #streak
+                  h3 Streak
+                  p Your current streak is <span>{{ streak }}</span> day(s)
+                #volume
+                  h3 Volume (Weekly)
+                  p Squat: <span>{{ volume.Squat }}</span>
+                  p Bench: <span>{{ volume.Bench }}</span>
+                  p Deadlift: <span>{{ volume.Deadlift }}</span>
+                  p Press: <span>{{ volume.Press }}</span>
+                #records
+                  h3 Best Lifts
+                  p Squat: <span>{{ records.Squat }}</span>
+                  p Bench: <span>{{ records.Bench }}</span>
+                  p Deadlift: <span>{{ records.Deadlift }}</span>
+                  p Press: <span>{{ records.Press }}</span>
+
+        form(novalidate, ng-show="show.form")
+          .form-group
+            label(for="date") Date:
+            input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+            br
+             
+            label(for="exercise") Exercise: 
+            select.form-control(type="text", id="exercise" ng-model="formData.exercise")
+              option Bench
+              option Squat
+              option Deadlift
+              option Press
+              option Chin
+            br
+              
+            label(for="weight") Weight: 
+            output(for="weight", id="weightOut")
+            br
+            input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
+            br
+              
+            label(for="sets") Sets:
+            output(for="sets", id="setsOut")
+            br
+            input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
+            br
+              
+            label(for="reps") Reps:
+            output(for="reps", id="repsOut")
+            br
+            input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+            br
+     
+          button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
+         
+      .container-fluid 
+        #about(ng-show='show.about')
+          ul
+            li <code>stamina</code> is a simple webapp for logging lifting sessions.
+            br
+            li View the project on&nbsp;
+              a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
+      
+        form(id='contact', novalidate, ng-show='show.contact')
+          .form-group
+            label(for="reason") Subject
+            select.form-control(type="select", name="reason")
+              option Report a bug
+              option Suggest a feature
+              option Give us your feedback
 
     br
-    br
-
-    
-  footer
-    ul.footer-list
-      li &copy; 2016 Joseph Weeks |&nbsp;
-      li Licensed under&nbsp;
-        a(href="https://raw.githubusercontent.com/jdweeks/stamina/master/LICENSE.md", target="_blank") MIT
+    footer
+      ul.footer-list
+        li &copy; 2016 Joseph Weeks |&nbsp;
+        li Licensed under&nbsp;
+          a(href="https://raw.githubusercontent.com/jdweeks/stamina/master/LICENSE.md", target="_blank") MIT

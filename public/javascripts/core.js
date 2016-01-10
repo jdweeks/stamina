@@ -4,6 +4,8 @@
 
   app.controller('mainController', ['$scope', '$http', function($scope, $http) {
     $scope.formData = {};
+    $scope.contactData = {};
+
     $scope.volume = {};
     $scope.records = {};
     $scope.workouts = [];
@@ -59,7 +61,7 @@
     $scope.getWorkouts();
 
     // when submitting add form, POST to API
-    $scope.createWorkout = function(next) {
+    $scope.createWorkout = function() {
       $http.post('/api/workouts', $scope.formData)
         .success(function(data) {
           console.log(data);
@@ -67,7 +69,6 @@
           data.date = new Date(data.date).toDateString();
           $scope.workouts.push(data);
 
-          // next($scope.workouts); // update streak
           $scope.getVolume(data.exercise); // update volume
           $scope.getRecords(data.exercise); // update records
         })
@@ -97,7 +98,7 @@
     };
 
     // update workout by PUT request
-    $scope.saveUpdated = function(next) {
+    $scope.saveUpdated = function() {
       $http.put('/api/workouts/'+$scope.workouts[$scope.workoutIndex]._id, $scope.formData)
         .success(function(data) {
           console.log(data);
@@ -110,7 +111,6 @@
             reps: data.reps
           };
 
-          // next($scope.workouts); // update streak
           $scope.getVolume(data.exercise); // update volume
           $scope.getRecords(data.exercise); // update records
         })
@@ -223,6 +223,18 @@
 
     $scope.clearFormData = function() {
       $scope.formData = {};
+    };
+
+    $scope.sendFeedback = function() {
+      $http.post('/contact', $scope.contactData)
+        .success(function(data) {
+          console.log(data);
+          $scope.contactData = {};
+          $scope.setView({ table: true });
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
     };
 
   }]);

@@ -21,7 +21,7 @@ var routes = require('./routes/index');
 var workouts = require('./routes/workouts');
 var volume = require('./routes/volume');
 var records = require('./routes/records');
-
+var contact = require('./routes/contact');
 var app = express();
 
 // sass setup
@@ -58,6 +58,7 @@ app.use('/', routes);
 app.use('/api/workouts', workouts);
 app.use('/api/volume', volume)
 app.use('/api/records', records);
+app.use('/contact', contact);
 
 // passport config
 var account = require('./model/account');

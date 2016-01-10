@@ -117,12 +117,21 @@ html(ng-app="stamina")
       
         form(id='contact', novalidate, ng-show='show.contact')
           .form-group
+            label(for="email") Email
+            input.form-control(type="email", name="email", placeholder="Enter your email address", ng-model="contactData.email")
+            br
             label(for="reason") Subject
-            select.form-control(type="select", name="reason")
+            select.form-control(type="select", name="reason", ng-model="contactData.reason")
               option Report a bug
               option Suggest a feature
               option Give us your feedback
+            br
+            label(for="msg") Message
+            textarea.form-control.vresize(name="msg", ng-model="contactData.msg")
+            br
+          button.btn.btn-primary.pull-right(type="submit", ng-click="sendFeedback()") Send  
 
+    br
     br
     footer
       ul.footer-list

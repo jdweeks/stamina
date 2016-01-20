@@ -48,14 +48,14 @@ html(ng-app="stamina")
         .container-fluid
           .content(ng-show='show.table')
             .row
-              .col-xs-6
+              .col-md-6
                 h3 Recent
                 #recent(ng-repeat='w in workouts.slice(-10)')
                   p {{ w.date }}
                   p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
                   button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
                   button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
-              .col-xs-6
+              .col-md-6.dashboard
                 #streak
                   h3 Streak
                   p Your current streak is <span>{{ streak }}</span> day(s)
@@ -72,14 +72,15 @@ html(ng-app="stamina")
                   p Deadlift: <span>{{ records.Deadlift }}</span>
                   p Press: <span>{{ records.Press }}</span>
 
-        form(novalidate, ng-show="show.form")
+        form(name="wForm", novalidate, ng-show="show.form")
           .form-group
             label(for="date") Date:
-            input.form-control(type="date", id="date", ng-model="formData.date", placeholder="yyyy-mm-dd")
+            input.form-control(type="date", ng-model="formData.date", placeholder="yyyy-mm-dd", name="date", id="date", required)
+            p(ng-show="wForm.date.$invalid && !wForm.date.$pristine", class="error") Please enter a valid date.
             br
              
             label(for="exercise") Exercise: 
-            select.form-control(type="text", id="exercise" ng-model="formData.exercise")
+            select.form-control(type="text", name="exercise", id="exercise" ng-model="formData.exercise", required)
               option Bench
               option Squat
               option Deadlift
@@ -88,24 +89,24 @@ html(ng-app="stamina")
             br
               
             label(for="weight") Weight: 
-            output(for="weight", id="weightOut")
+            output(for="weight", id="weightOut", ng-show="wForm.weight.$dirty")
             br
-            input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
+            input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", required, oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
             br
               
             label(for="sets") Sets:
-            output(for="sets", id="setsOut")
+            output(for="sets", id="setsOut", ng-show="wForm.sets.$dirty")
             br
-            input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
+            input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", required, oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
             br
               
             label(for="reps") Reps:
-            output(for="reps", id="repsOut")
+            output(for="reps", id="repsOut", ng-show="wForm.reps.$dirty")
             br
-            input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+            input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", required, oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
             br
      
-          button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()") Save
+          button.btn.btn-primary.pull-right(type="submit", ng-click="decideAction()", ng-disabled="wForm.$invalid") Save
          
       .container-fluid 
         #about(ng-show='show.about')
@@ -115,21 +116,22 @@ html(ng-app="stamina")
             li View the project on&nbsp;
               a(href="https://github.com/jdweeks/stamina", target="_blank") GitHub.
       
-        form(id='contact', novalidate, ng-show='show.contact')
+        form(name="cForm", id='contact', novalidate, ng-show='show.contact')
           .form-group
             label(for="email") Email
-            input.form-control(type="email", name="email", placeholder="Enter your email address", ng-model="contactData.email")
+            input.form-control(type="email", name="email", ng-model="contactData.email", required)
+            p(ng-show="cForm.email.$invalid && !cForm.email.$pristine", class="error") Please enter a valid email.
             br
             label(for="reason") Subject
-            select.form-control(type="select", name="reason", ng-model="contactData.reason")
+            select.form-control(type="select", name="reason", ng-model="contactData.reason", required)
               option Report a bug
               option Suggest a feature
               option Give us your feedback
             br
             label(for="msg") Message
-            textarea.form-control.vresize(name="msg", ng-model="contactData.msg")
+            textarea.form-control.vresize(name="msg", ng-model="contactData.msg", required)
             br
-          button.btn.btn-primary.pull-right(type="submit", ng-click="sendFeedback()") Send  
+          button.btn.btn-primary.pull-right(type="submit", ng-click="sendFeedback()", ng-disabled="cForm.$invalid") Send  
 
     br
     br

@@ -10,7 +10,7 @@ body {
   background: $backg !important;
 }
 
-.jumbotron, .col-xs-6, #streak, #volume, #about {
+.jumbotron, .col-md-6, #records, #streak, #volume, #about {
   border-bottom: 3px solid #e5e5e5 !important;
   background-color: #fff;
 }
@@ -45,13 +45,13 @@ body {
   display: inline;
 }
 
-.col-xs-6 {
+.col-md-6 {
   border-right: 5px solid $backg;
   text-align: center;
   padding: 0 0 10px 0;
   h3 {
     font-style: oblique;
-    padding-bottom: 10px;
+    padding: 10px 0 10px 0;
   }
 }
 
@@ -59,6 +59,11 @@ body {
   border-top: 2px dotted #e5e5e5;
   padding-top: 10px;
 }
+
+#records, #streak, #volume {
+  margin-top: -16px;
+}
+
 
 .vresize {
   resize: vertical;
@@ -81,3 +86,12 @@ span {
   background-color: #222222;
 }
 
+.error {
+  margin: 5px;
+  font-style: oblique;
+}
+
+.dashboard {
+  background-color: $backg;
+  border-bottom: none !important;
+}

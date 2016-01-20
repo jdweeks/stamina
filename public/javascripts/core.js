@@ -45,7 +45,7 @@
     }
 
     // GET all workouts
-    $scope.getWorkouts = function(next) {
+    $scope.getWorkouts = function() {
       $http.get('/api/workouts')
         .success(function(data) {
           $scope.workouts = data;
@@ -141,10 +141,9 @@
     $scope.decideAction = function() {
       if ($scope.updateFlag)
         $scope.saveUpdated($scope.countStreak);
-      else {
+      else 
         $scope.createWorkout($scope.countStreak);
-        $('.navbar-toggle').click();
-      }
+
       // reset state variables
       $scope.setUpdateFlag(false);
       $scope.clearFormData();
@@ -179,8 +178,6 @@
       weightOut.innerHTML = $scope.formData.weight || wavg;
       setsOut.innerHTML = $scope.formData.sets || savg;
       repsOut.innerHTML = $scope.formData.reps || ravg;
-
-      $('.navbar-toggle').click();
     };
 
     $scope.getVolume = function(name) {

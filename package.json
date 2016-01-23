@@ -33,11 +33,5 @@
   },
   "devDependencies": {
     "supertest": "^1.1.0"
-  },
-  "config": {
-    "blanket": {
-      "pattern": [ "" ],
-      "data-cover-never": [ "node_modules", "tests" ]
-    }
   }
 }

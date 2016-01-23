@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# install dependencies
+npm install
+
+# create cache directory
+mkdir cache

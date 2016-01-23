@@ -11,10 +11,16 @@ To start hacking as is, you'll need Node.js (plus nodemon for live reload) insta
 
 ### Getting Started
 1. `git clone` this repository or download it as an archive.
-2. Go to the `stamina-master` directory in your terminal. Install dependencies. `npm install`
+2. Go to the `stamina` directory in your terminal. Run the setup script. `./setup`
 3. Create an environment variable called `MONGOLAB_URI` to connect to your development database.
-4. Back in the `stamina-master` directory, start the Node server. `npm start`
-5. In your browser, navigate to `localhost:3000`
+4. Back in the `stamina` directory, start the Node server. `npm start`
+4. Or if you have nodemon installed (`npm install -g nodemon`) and want live reload. `npm run-script watch`
+5. In your browser, navigate to (http://localhost:3000)
+
+### Testing
+To unit test the API: 
+1. Make sure you have mocha installed. `npm install -g mocha`
+2. Run `mocha` in the project root directory.
 
 ### Structure Overview
 * `model/` -> files relevant to the database model and schema
@@ -23,6 +29,7 @@ To start hacking as is, you'll need Node.js (plus nodemon for live reload) insta
 * `views/` -> Jade templates; index.jade contains the view for the angular app
 * `bin/` -> contains the express-generated startup script (www)
 * `sass/` -> sass files to be compiled to css
+* `test/` -> contains unit tests for the API
 
 ### Screenshot
 ![View](screenshot.png?raw=true)

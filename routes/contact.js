@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var mailer = require('nodemailer');
-var transport = mailer.createTransport();
+const express = require('express');
+const router = express.Router();
+const mailer = require('nodemailer');
+const transport = mailer.createTransport();
 
 router.post('/', function(req, res) {
   transport.sendMail({
@@ -9,9 +9,17 @@ router.post('/', function(req, res) {
     to: 'jdweeks@g.clemson.edu',
     subject: 'Stamina: ' + req.body.reason,
     text: req.body.msg
+  }, 
+  function(err, info) {
+    if (err) {
+      res.status(400);
+      res.send(err);
+      return console.error(err);
+    }   
+
+    res.status(200);
+    res.send(info);
   });
-  res.status(200);
-  res.send('Feedback submitted successfully');
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
 
 router.get('/?', function(req, res) {
   if (!req.user) {
@@ -14,8 +14,8 @@ router.get('/?', function(req, res) {
   };
   mongoose.model('Workout').find(query, function(err, data) {
     if (err) {
-      res.status(500);
-      res.send('Error retrieving');
+      res.status(400);
+      res.send('Error retrieving: ' + err);
       return;
     }
     

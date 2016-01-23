@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 // note: passport-local-mongoose handles password salting & hashing
 var accountSchema = new mongoose.Schema({

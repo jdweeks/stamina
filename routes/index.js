@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var passport = require('passport');
-var account = require('../model/account');
+const passport = require('passport');
+const account = require('../model/account');
 
 router.get('/', function(req, res) {
   res.render('index', { user: req.user });

@@ -1,28 +1,28 @@
-var express = require('express');
-var path = require('path');
-var session = require('express-session');
-var favicon = require('serve-favicon');
+const express = require('express');
+const path = require('path');
+const session = require('express-session');
+const favicon = require('serve-favicon');
 
-var sass = require('node-sass-middleware');
-var compression = require('compression');
-var minify = require('express-minify');
+const sass = require('node-sass-middleware');
+const compression = require('compression');
+const minify = require('express-minify');
 
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var db = require('./model/db');
-var workout = require('./model/workouts');
+const db = require('./model/db');
+const workout = require('./model/workouts');
 
-var passport = require('passport');
-var localStategy = require('passport-local').Strategy;
+const passport = require('passport');
+const localStategy = require('passport-local').Strategy;
 
-var routes = require('./routes/index');
-var workouts = require('./routes/workouts');
-var volume = require('./routes/volume');
-var records = require('./routes/records');
-var contact = require('./routes/contact');
-var app = express();
+const routes = require('./routes/index');
+const workouts = require('./routes/workouts');
+const volume = require('./routes/volume');
+const records = require('./routes/records');
+const contact = require('./routes/contact');
+const app = express();
 
 // sass setup
 app.use(sass({

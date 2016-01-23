@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser'); // parses POST info
-var methodOverride = require('method-override'); // manipulates POST
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser'); // parses POST info
+const methodOverride = require('method-override'); // manipulates POST
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(methodOverride( function (req, res) {

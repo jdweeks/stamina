@@ -81,7 +81,7 @@ router.route('/:id')
   .get(function(req, res) {
     mongoose.model('Workout').findById(req.id, function(err, workout) {
       if (err) {
-        res.status(500);
+        res.status(400);
         res.send('GET Error: There was a problem retrieving: ' + err);
         return;
       }

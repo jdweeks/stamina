@@ -47,7 +47,49 @@ describe('GET /api/records', function() {
   it('logout', logout());
 });
 
-/*
+describe('create, read, update, delete', function() {
+  var workout = {};
+  it('login', login());
+  it('create', function(done) {
+    server
+      .post('/api/workouts')
+      .send({
+        date: new Date(),
+        exercise: 'Squat',
+        weight: 225,
+        sets: 5,
+        reps: 5
+      })
+      .expect(function(res) {
+        workout = res.body;
+      })
+      .expect(200, done)
+  });
+  it('read', function(done) {
+    server
+      .get('/api/workouts/' + workout._id)
+      .expect(200, done)
+  });
+  it('update', function(done) {
+    server
+      .put('/api/workouts/' + workout._id)
+      .send({
+        date: new Date(),
+        exercise: workout.exercise,
+        weight: workout.weight,
+        sets: workout.sets,
+        reps: workout.reps,
+      })
+      .expect(200, done)
+  });
+  it('delete', function(done) {
+    server
+      .delete('/api/workouts/' + workout._id)
+      .expect(200, done)
+  });
+  it('logout', logout());
+});
+
 describe('POST /contact', function() {
   it('respond OK', function(done) {
     server
@@ -56,7 +98,6 @@ describe('POST /contact', function() {
       .expect(200, done)
   });
 });
-*/
 
 function login() {
   return function(done) {

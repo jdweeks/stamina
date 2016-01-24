@@ -109,7 +109,7 @@ router.put('/:id', function(req, res) {
     workout.exercise = req.body.exercise;
     workout.weight = req.body.weight;
     workout.sets = req.body.sets;
-    workout.rep = req.body.reps;
+    workout.reps = req.body.reps;
 
     workout.save(function (err) {
       if (err) {

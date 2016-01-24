@@ -11,7 +11,7 @@ To start hacking as is, you'll need Node.js installed on your machine and access
 
 ### Getting Started
 1. `git clone` this repository or download it as an archive.
-2. Go to the `stamina` directory in your terminal. Run the setup script. `./setup`
+2. Go to the `stamina` directory in your terminal. Install dependencies. `npm install`
 3. Create an environment variable called `MONGOLAB_URI` to connect to your development database.
 4. Back in the `stamina` directory, start the Node server. `npm start`
 4. Or, if you have nodemon installed (`npm install -g nodemon`) and want live reload. `npm run-script watch`

@@ -1,9 +1,14 @@
 {
   "name": "stamina",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "author": "JD Weeks <jdweeks@g.clemson.edu>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdweeks/stamina.git"
+  },
   "scripts": {
+    "preinstall": "./setup",
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www",
     "test": "mocha"

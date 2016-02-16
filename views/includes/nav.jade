@@ -1,0 +1,23 @@
+nav.navbar.navbar-inverse(role="navigation")
+  .navbar-header
+    button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#mynavbar", aria-expanded="false", aria-controls="navbar")
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    a.navbar-brand Stamina
+
+  #mynavbar.collapse.navbar-collapse
+    ul.nav.navbar-nav
+      li: a(ng-click="setView({ table: true })") Dashboard
+      li.dropdown
+        a.dropdown-toggle(data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
+          span.caret
+        ul.dropdown-menu(role="menu")
+          li: a(ng-click="clickSubmit()") Submit
+      li: a(ng-click="setView({ about: true })") About
+      li: a(ng-click="setView({ contact: true })") Contact
+    ul.nav.navbar-nav.navbar-right
+      if (user)
+        li: a(id='username') #{user.username}
+      li: a(href="/logout") Logout

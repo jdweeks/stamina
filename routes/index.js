@@ -5,7 +5,8 @@ const passport = require('passport');
 const account = require('../model/account');
 
 router.get('/', function(req, res) {
-  res.render('index', { user: req.user });
+  if (!req.user) res.redirect('/login');
+  else res.render('index', { user: req.user });
 });
 
 router.get('/register', function(req, res) {

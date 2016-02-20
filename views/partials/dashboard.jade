@@ -1,0 +1,25 @@
+.content(ng-controller='mainCtrl')
+  .row
+    .col-md-6
+      h3 Recent
+      #recent(ng-repeat='w in workouts.slice(-10)')
+        p {{ w.date }}
+        p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
+        button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
+        button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
+    .col-md-6.dashboard
+      #streak
+        h3 Streak
+        p Your current streak is <span>{{ streak }}</span> day(s)
+      #volume
+        h3 Volume (Weekly)
+        p Squat: <span>{{ volume.Squat }}</span>
+        p Bench: <span>{{ volume.Bench }}</span>
+        p Deadlift: <span>{{ volume.Deadlift }}</span>
+        p Press: <span>{{ volume.Press }}</span>
+      #records
+        h3 Best Lifts
+        p Squat: <span>{{ records.Squat }}</span>
+        p Bench: <span>{{ records.Bench }}</span>
+        p Deadlift: <span>{{ records.Deadlift }}</span>
+        p Press: <span>{{ records.Press }}</span>

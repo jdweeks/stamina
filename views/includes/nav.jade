@@ -9,14 +9,14 @@ nav.navbar.navbar-inverse(role="navigation")
 
   #mynavbar.collapse.navbar-collapse
     ul.nav.navbar-nav
-      li: a(ng-click="setView({ table: true })") Dashboard
+      li: a(href="#/dashboard") Dashboard
       li.dropdown
         a.dropdown-toggle(data-toggle="dropdown", role="button", aria-expanded="false" ) Action 
           span.caret
         ul.dropdown-menu(role="menu")
-          li: a(ng-click="clickSubmit()") Submit
-      li: a(ng-click="setView({ about: true })") About
-      li: a(ng-click="setView({ contact: true })") Contact
+          li: a(href="#/submit") Submit
+      li: a(href="#/about") About
+      li: a(href="#/contact") Contact
     ul.nav.navbar-nav.navbar-right
       if (user)
         li: a(id='username') #{user.username}

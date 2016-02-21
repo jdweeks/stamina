@@ -83,6 +83,12 @@ span {
 }
 
 .pull-right {
+  &:disabled {
+    background: lighten(#222222, 10%);
+    &:hover {
+      background: lighten(#222222, 5%);
+    }
+  }
   background-color: #222222;
 }
 

@@ -64,6 +64,10 @@ span {
 
 .pull-right {
   background-color: #222222; }
+  .pull-right:disabled {
+    background: #3c3c3c; }
+    .pull-right:disabled:hover {
+      background: #2f2f2f; }
 
 .error {
   margin: 5px;

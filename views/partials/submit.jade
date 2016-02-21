@@ -15,21 +15,21 @@ form(name="wForm", novalidate, ng-controller="submCtrl")
     br
       
     label(for="weight") Weight: 
-    output(for="weight", id="weightOut", ng-show="wForm.weight.$dirty")
+    output {{ formData.weight }}
     br
-    input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", required, oninput="document.getElementById('weightOut').innerHTML = parseInt(document.getElementById('weight').value,10)")
+    input.form-control(type="range", name="weight", id="weight", ng-model="formData.weight", min="0", max="500", required)
     br
       
     label(for="sets") Sets:
-    output(for="sets", id="setsOut", ng-show="wForm.sets.$dirty")
+    output {{ formData.sets }}
     br
-    input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", required, oninput="document.getElementById('setsOut').innerHTML = parseInt(document.getElementById('sets').value,10)")
+    input.form-control(type="range", name="sets", id="sets", ng-model="formData.sets", min="0", max="20", required)
     br
       
     label(for="reps") Reps:
-    output(for="reps", id="repsOut", ng-show="wForm.reps.$dirty")
+    output {{ formData.reps }}
     br
-    input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", required, oninput="document.getElementById('repsOut').innerHTML = parseInt(document.getElementById('reps').value,10)")
+    input.form-control(type="range", name="reps", id="reps", ng-model="formData.reps", min="0", max="20", required)
     br
 
   button.btn.btn-primary.pull-right(type="submit", ng-click="createWorkout()", ng-disabled="wForm.$invalid") Save

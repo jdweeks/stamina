@@ -5,7 +5,7 @@
     config(['$routeProvider', function($routeProvider) {
       $routeProvider.
         when('/dashboard', {
-          templateUrl: '/partials/dashboard',
+          templateUrl: 'partials/dashboard',
           controller: 'dashCtrl'
         }).
         when('/submit', {

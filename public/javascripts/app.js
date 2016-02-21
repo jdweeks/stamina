@@ -6,11 +6,11 @@
       $routeProvider.
         when('/dashboard', {
           templateUrl: '/partials/dashboard',
-          controller: 'mainCtrl'
+          controller: 'dashCtrl'
         }).
         when('/submit', {
           templateUrl: 'partials/submit',
-          controller: 'mainCtrl'
+          controller: 'submCtrl'
         }).
         when('/contact', {
           templateUrl: 'partials/contact',
@@ -23,4 +23,6 @@
           redirectTo: '/dashboard'
         });
     }]);
+    
+  angular.module('stamina.controllers', []);
 })();

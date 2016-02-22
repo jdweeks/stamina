@@ -76,7 +76,7 @@ router.param('id', function(req, res, next, id) {
   });
 });
 
-router.route('/:id')
+router.route('/:id?')
   // GET individual workout
   .get(function(req, res) {
     mongoose.model('Workout').findById(req.id, function(err, workout) {
@@ -85,7 +85,10 @@ router.route('/:id')
         res.send('GET Error: There was a problem retrieving: ' + err);
         return;
       }
-      res.json(workout);
+      
+      if (req.query.format === 'json') 
+        return res.json(workout); 
+      res.render('partials/update');
     });
   });
 

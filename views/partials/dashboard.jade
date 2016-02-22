@@ -6,7 +6,7 @@
         #recent(ng-repeat='w in workouts.slice(-10)')
           p {{ w.date }}
           p <strong>{{ w.exercise }}</strong> <span>{{ w.weight }} x {{ w.sets }} x {{ w.reps }}</span>
-          button.btn.btn-link(ng-click="updateWorkout(w._id)") Update
+          a(href="update/{{ w._id }}") Update
           button.btn.btn-link(ng-click="deleteWorkout(w._id)") Delete
       .col-md-6.dashboard
         #streak

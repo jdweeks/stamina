@@ -5,16 +5,14 @@ const passport = require('passport');
 const account = require('../model/account');
 
 router.get('/', function(req, res) {
-  if (!req.user) res.redirect('/login');
-  else res.render('index', { user: req.user });
+  if (!req.user) return res.redirect('/login');
+  res.render('index', { user: req.user });
 });
 
 router.get('/partials/:name', function(req, res) {
-  if (!req.user) res.redirect('/login');
-  else {
-    const name = req.params.name;
-    res.render('partials/' + name);
-  }
+  if (!req.user) return res.redirect('/login');
+  const name = req.params.name;
+  res.render('partials/' + name);
 });
 
 router.get('/register', function(req, res) {

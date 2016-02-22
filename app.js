@@ -58,7 +58,7 @@ app.use('/', routes);
 app.use('/api/workouts', workouts);
 app.use('/api/volume', volume)
 app.use('/api/records', records);
-app.use('/contact', contact);
+app.use('/api/contact', contact);
 
 // passport config
 var account = require('./model/account');

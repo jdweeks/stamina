@@ -1,0 +1,35 @@
+form(name="uForm", novalidate, ng-controller="updCtrl")
+  .form-group
+    label(for="uDate") Date:
+    input.form-control(type="date", ng-model="updateData.date", placeholder="yyyy-mm-dd", name="date", id="uDate", required)
+    p(ng-show="uForm.date.$invalid && !uForm.date.$pristine", class="error") Please enter a valid date.
+    br
+      
+    label(for="uExercise") Exercise: 
+    select.form-control(type="text", name="exercise", id="uExercise", ng-model="updateData.exercise", required)
+      option Bench
+      option Squat
+      option Deadlift
+      option Press
+      option Chin
+    br
+      
+    label(for="uWeight") Weight: 
+    output {{ updateData.weight }}
+    br
+    input.form-control(type="range", name="weight", id="uWeight", ng-model="updateData.weight", min="0", max="500", required)
+    br
+      
+    label(for="uSets") Sets:
+    output {{ updateData.sets }}
+    br
+    input.form-control(type="range", name="sets", id="uSets", ng-model="updateData.sets", min="0", max="20", required)
+    br
+      
+    label(for="uReps") Reps:
+    output {{ updateData.reps }}
+    br
+    input.form-control(type="range", name="reps", id="uReps", ng-model="updateData.reps", min="0", max="20", required)
+    br
+
+  button.btn.btn-primary.pull-right(type="submit", ng-click="updateWorkout()", ng-disabled="uForm.$invalid") Save

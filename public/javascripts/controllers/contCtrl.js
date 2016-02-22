@@ -6,7 +6,7 @@
       $scope.contactData = {};
       
       $scope.sendFeedback = function() {
-        $http.post('/contact', $scope.contactData)
+        $http.post('/api/contact', $scope.contactData)
           .success(function(data) {
             console.log(data);
             $scope.contactData = {};

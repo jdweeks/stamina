@@ -1,7 +1,7 @@
 form(name="uForm", novalidate, ng-controller="updCtrl")
   .form-group
     label(for="uDate") Date:
-    input.form-control(type="date", ng-model="updateData.date", placeholder="yyyy-mm-dd", name="date", id="uDate", required)
+    input.form-control(type="date", ng-model="updateData.date", name="date", id="uDate", required)
     p(ng-show="uForm.date.$invalid && !uForm.date.$pristine", class="error") Please enter a valid date.
     br
       

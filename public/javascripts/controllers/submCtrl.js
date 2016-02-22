@@ -6,6 +6,7 @@
       $scope.formData = {};
       
       $scope.createWorkout = function() {
+        $scope.formData.date = new Date();
         $http.post('/api/workouts', $scope.formData)
           .success(function(data) {
             console.log(data);

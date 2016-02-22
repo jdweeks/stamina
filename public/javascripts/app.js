@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('stamina', ['stamina.controllers', 'ngRoute']).
+  angular.module('stamina', ['stamina.controllers', 'ngRoute', 'ngAnimate']).
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/dashboard', {
@@ -29,7 +29,7 @@
           redirectTo: '/dashboard'
         });
         
-      $locationProvider.html5Mode(true);
+      $locationProvider.html5Mode(false);
     }]);
     
   angular.module('stamina.controllers', []);

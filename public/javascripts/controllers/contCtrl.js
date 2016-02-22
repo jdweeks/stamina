@@ -10,9 +10,11 @@
           .success(function(data) {
             console.log(data);
             $scope.contactData = {};
+            $('#success-modal').modal('toggle');
           })
           .error(function(data) {
             console.log('Error: ' + data);
+            $('#failure-modal').modal('toggle');
           });
       };
     }]);

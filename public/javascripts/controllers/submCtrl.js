@@ -11,9 +11,11 @@
           .success(function(data) {
             console.log(data);
             $scope.formData = {};
+            $('#success-modal').modal('toggle');
           })
           .error(function(data) {
             console.log('Error: ' + data);
+            $('#failure-modal').modal('toggle');
           });
       };
     }]);

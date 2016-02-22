@@ -27,9 +27,11 @@
         $http.put('/api/workouts/' + id, $scope.updateData)
           .success(function(data) {
             console.log(data);
+            $('#success-modal').modal('show');
           })
           .error(function(data) {
             console.log('Error: ' + data);
+            $('#failure-modal').modal('show');
           });
       };
     }]);

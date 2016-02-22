@@ -1,0 +1,21 @@
+.modal.fade#success-modal(role="dialog")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal") &times;
+        h4.modal-title Success!
+      .modal-body
+        p Your data was successfully submitted.
+      .modal-footer 
+        button.btn.btn-success(type="button" data-dismiss="modal") OK
+        
+.modal.fade#failure-modal(role="dialog")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button" data-dismiss="modal") &times;
+        h4.modal-title We're Sorry
+      .modal-body
+        p Your data failed to be submitted.
+      .modal-footer 
+        button.btn.btn-danger(type="button" data-dismiss="modal") Back

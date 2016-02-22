@@ -90,10 +90,10 @@ describe('create, read, update, delete', function() {
   it('logout', logout());
 });
 
-describe('POST /contact', function() {
+describe('POST /api/contact', function() {
   it('respond OK', function(done) {
     server
-      .post('/contact')
+      .post('/api/contact')
       .send({ email: 'jdweeks@clemson.edu', reason: 'TEST', msg: 'This is a test.' })
       .expect(200, done)
   });

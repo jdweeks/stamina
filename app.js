@@ -26,13 +26,13 @@ const app = express();
 
 // sass setup
 app.use(sass({
-  src: __dirname + '/sass',
-  dest: __dirname + '/public',
-  debug: true
+  src: path.join(__dirname, 'assets', 'sass'),
+  dest: path.join(__dirname, 'public'),
+  debug: false
 }));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'assets', 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));

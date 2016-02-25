@@ -14,8 +14,7 @@ To start hacking as is, you'll need Node.js installed on your machine and access
 2. Go to the `stamina` directory in your terminal. Install dependencies. `npm install`
 3. Create an environment variable `$MONGOLAB_URI` to connect to your dev database.
 4. Back in the `stamina` directory, start the Node server. `npm start`
-5. Or, if you have nodemon installed (`npm install -g nodemon`) and want live reload. `npm run watch`
-6. In your browser, view the app at [localhost:3000](http://localhost:3000)
+5. In your browser, view the app at [localhost:3000](http://localhost:3000)
 
 ### Testing
 1. Make sure you have mocha installed. `npm install -g mocha`
@@ -24,12 +23,11 @@ To start hacking as is, you'll need Node.js installed on your machine and access
 4. For coverage reporting, install istanbul (`npm install -g istanbul`) and run `istanbul cover _mocha`
 
 ### Structure Overview
-* `model/` -> database model / schema
-* `public/` -> frontend files (css, js, etc.)
-* `routes/` -> REST routes for the API
-* `views/` -> Jade templates
 * `bin/` -> contains the express-generated startup script (www)
-* `sass/` -> sass files to be compiled
+* `model/` -> database model / schema
+* `routes/` -> REST routes for the API
+* `assets/` -> sass files, jade templates, development js
+* `public/` -> compiled frontend files (css, js, etc.)
 * `test/` -> unit tests for the API
 
 ### Screenshot

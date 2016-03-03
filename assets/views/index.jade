@@ -2,15 +2,9 @@ doctype html
 html(ng-app="stamina")
   include includes/head.jade
   body
-    #wrapper 
+    #wrapper(ng-controller="mainCtrl")
+      include includes/nav.jade
       .container-fluid
-        include includes/nav.jade
-
-        .jumbotron.text-center
-          h2 Stamina
-        
         div(ng-view)
-        
         include includes/modals.jade
-
     include includes/footer.jade

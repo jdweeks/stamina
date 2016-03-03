@@ -30,6 +30,16 @@
         });
         
       $locationProvider.html5Mode(false);
+    }])
+    
+    .controller('mainCtrl', ['$rootScope', '$route', function($rootScope, $route) {
+      // ensure navigation menu closes when route changes
+      $rootScope.$on('$routeChangeSuccess', function(e, curr, prev) {
+        if (prev && prev.redirectTo !== '/dashboard') { // disregard initial load
+          if (curr && curr.originalPath !== '/update/:id') // disregard update route
+            $('.navbar-toggle').click();
+        }
+      });
     }]);
     
   angular.module('stamina.controllers', []);
